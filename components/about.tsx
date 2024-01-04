@@ -18,7 +18,7 @@ export default function About() {
 
       <p className="mb-3">
         After graduating with a<span className="font-medium"> Bachelor's degree in Fisheries</span>, I developed an interest in programming, specifically in<span className="font-medium"> frontend web development</span>.
-        <span className="italic">My favorite aspect of programming is </span>problem-solving. I <span className="underline">enjoy</span> the process of finding solutions to challenges that arise in the programs I create.
+        <span className="italic"> My favorite aspect of programming is </span>problem-solving. I <span className="underline">enjoy</span> the process of finding solutions to challenges that arise in the programs I create.
       </p>
 
       {/* 
