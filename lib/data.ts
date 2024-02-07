@@ -2,7 +2,9 @@ import React from 'react';
 import { CgWorkAlt } from 'react-icons/cg';
 import { FaReact } from 'react-icons/fa';
 import { LuGraduationCap } from 'react-icons/lu';
-import kopiq from '@/public/kopiq.png';
+import kopiq from '@/public/kopiQ.png';
+import word from '@/public/data.png';
+import excel from '@/public/excel5.png';
 import dashboard from '@/public/dashboard.png';
 import webImg from '@/public/web.png';
 import webPortfolio from '@/public/webPortfolio.png';
@@ -60,6 +62,20 @@ export const experiencesData = [
 
 export const projectsData = [
   {
+    title: 'Data Processing',
+    description: 'Processing research data on the influence of adding cinnamon powder doses on the growth of tiger grouper fish, January 2023.',
+    tags: ['Microsoft Excel'],
+    imageUrl: excel,
+    linkUrl: excel,
+  },
+  {
+    title: 'Shrimp Breeding Report',
+    description: 'Creating a Report on the Results of Giant Prawn Breeding during the Internship at BRPI Subang, West Java, January 2022.',
+    tags: ['Microsoft Word'],
+    imageUrl: word,
+    linkUrl: word,
+  },
+  {
     title: 'Kedai KopiQ',
     description: 'This project is my first website when I was learning the basics of web programming.',
     tags: ['HTML', 'CSS', 'Javascript'],
@@ -93,7 +109,7 @@ export const skillsData = [
   'HTML',
   'CSS',
   'JavaScript',
-  // 'TypeScript',
+  'TypeScript',
   'React',
   'Next.js',
   // 'Node.js',

@@ -9,16 +9,29 @@ export default function About() {
   const { ref } = useSectionInView('About');
 
   return (
-    <motion.section className="mb-28 max-w-[45rem] text-center leading-8 sm:mb-40 scroll-mt-48" initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.175 }} id="about" ref={ref}>
+    <motion.section
+      className="pb-28 sm:pb-24 md:mb-32 sm:mb-0 max-w-[45rem] text-center leading-8 md:scroll-mt-32 scroll-mt-28"
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.175 }}
+      id="about"
+      ref={ref}
+    >
       <SectionHeading>About me</SectionHeading>
-      <p className="mb-3">
+      <p className="mb-3 text-justify">
         My last activities as a student at Pekalongan University. I was once a part of
-        <span className="font-medium"> Student Regiment (Menwa)</span>organization and I had the opportunity to serve as <span className="font-medium">teaching assistant</span> for 2 semesters.
+        <span className="font-medium"> Student Regiment (Menwa)</span> organization and I had the opportunity to serve as <span className="font-medium">teaching assistant</span> for 2 semesters.
       </p>
 
-      <p className="mb-3">
+      <p className="mb-3 text-justify">
+        Throughout my studies, I developed expertise in creating reports related to the growth and production results of fisheries. During my academic journey, I consistently dealt with report writing and frequently operated{' '}
+        <span className="font-medium">Microsoft Word </span>
+        and <span className="font-medium">Microsoft Excel</span>. As a result, I am quite familiar with these tools and am quick to learn in this field
+      </p>
+
+      <p className="mb-3 text-justify">
         After graduating with a<span className="font-medium"> Bachelor's degree in Fisheries</span>, I developed an interest in programming, specifically in<span className="font-medium"> frontend web development</span>.
-        <span className="italic">My favorite aspect of programming is </span>problem-solving. I <span className="underline">enjoy</span> the process of finding solutions to challenges that arise in the programs I create.
+        <span className="italic"> My favorite aspect of programming is </span>problem-solving. I <span className="underline">enjoy</span> the process of finding solutions to challenges that arise in the programs I create.
       </p>
 
       {/* 
