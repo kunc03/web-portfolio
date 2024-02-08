@@ -66,14 +66,14 @@ export const projectsData = [
     description: 'Processing research data on the influence of adding cinnamon powder doses on the growth of tiger grouper fish, January 2023.',
     tags: ['Microsoft Excel'],
     imageUrl: excel,
-    linkUrl: excel,
+    linkUrl: '/',
   },
   {
     title: 'Shrimp Breeding Report',
     description: 'Creating a Report on the Results of Giant Prawn Breeding during the Internship at BRPI Subang, West Java, January 2022.',
     tags: ['Microsoft Word'],
     imageUrl: word,
-    linkUrl: word,
+    linkUrl: '/',
   },
   {
     title: 'Kedai KopiQ',
