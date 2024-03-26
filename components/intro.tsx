@@ -51,14 +51,14 @@ export default function Intro() {
         <div className="flex gap-2">
           <a
             className="bg-white text-gray-700 hover:text-gray-950 px-7 py-3 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15]  active:scale-105 transition cursor-pointer border border-black/10 dark:text-white/60 dark:bg-white/10 "
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/bagus-kuncoro-aziz-851636275/"
             target="_blank"
           >
             <BsLinkedin />
           </a>
           <a
             className="bg-white text-gray-700 hover:text-gray-950 px-7 py-3 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15]  active:scale-105 transition cursor-pointer border border-black/10 dark:text-white/60 dark:bg-white/10 "
-            href="https://github.com"
+            href="https://github.com/kunc03/"
             target="_blank"
           >
             <FaGitSquare />
