@@ -8,6 +8,7 @@ import excel from '@/public/excel5.png';
 import dashboard from '@/public/dashboard.png';
 import webImg from '@/public/web.png';
 import webPortfolio from '@/public/webPortfolio.png';
+import rentCar from '@/public/rentCar.png';
 
 export const links = [
   {
@@ -61,19 +62,26 @@ export const experiencesData = [
 ] as const;
 
 export const projectsData = [
+  // {
+  //   title: 'Data Processing',
+  //   description: 'Processing research data on the influence of adding cinnamon powder doses on the growth of tiger grouper fish, January 2023.',
+  //   tags: ['Microsoft Excel'],
+  //   imageUrl: excel,
+  //   linkUrl: '/',
+  // },
+  // {
+  //   title: 'Shrimp Breeding Report',
+  //   description: 'Creating a Report on the Results of Giant Prawn Breeding during the Internship at BRPI Subang, West Java, January 2022.',
+  //   tags: ['Microsoft Word'],
+  //   imageUrl: word,
+  //   linkUrl: '/',
+  // },
   {
-    title: 'Data Processing',
-    description: 'Processing research data on the influence of adding cinnamon powder doses on the growth of tiger grouper fish, January 2023.',
-    tags: ['Microsoft Excel'],
-    imageUrl: excel,
-    linkUrl: '/',
-  },
-  {
-    title: 'Shrimp Breeding Report',
-    description: 'Creating a Report on the Results of Giant Prawn Breeding during the Internship at BRPI Subang, West Java, January 2022.',
-    tags: ['Microsoft Word'],
-    imageUrl: word,
-    linkUrl: '/',
+    title: 'Rent Car',
+    description: 'This website exclusively showcases comprehensive car details, spanning from vehicle type, model, and year onwards. Leveraging an open-source API, it epitomizes innovation and accessibility in the automotive realm',
+    tags: ['Typescript, NextJs. Shadcn UI, Tailwind CSS'],
+    imageUrl: rentCar,
+    linkUrl: '/https://car-showcase-eight-hazel.vercel.app/',
   },
   {
     title: 'Kedai KopiQ',
