@@ -77,13 +77,6 @@ export const projectsData = [
   //   linkUrl: '/',
   // },
   {
-    title: 'Rent Car',
-    description: 'This website exclusively showcases comprehensive car details, spanning from vehicle type, model, and year onwards. Leveraging an open-source API, it epitomizes innovation and accessibility in the automotive realm',
-    tags: ['Typescript, NextJs. Shadcn UI, Tailwind CSS'],
-    imageUrl: rentCar,
-    linkUrl: '/https://car-showcase-eight-hazel.vercel.app/',
-  },
-  {
     title: 'Kedai KopiQ',
     description: 'This project is my first website when I was learning the basics of web programming.',
     tags: ['HTML', 'CSS', 'Javascript'],
@@ -110,6 +103,13 @@ export const projectsData = [
     tags: ['React', 'Next.js', 'Tailwind'],
     imageUrl: webImg,
     linkUrl: 'https://animelistbgs.vercel.app/',
+  },
+  {
+    title: 'Rent Car',
+    description: 'This website exclusively showcases comprehensive car details, spanning from vehicle type, model, and year onwards. Leveraging an open-source API, it epitomizes innovation and accessibility in the automotive realm',
+    tags: ['Typescript, Next.Js, Tailwind'],
+    imageUrl: rentCar,
+    linkUrl: '/https://car-showcase-eight-hazel.vercel.app/',
   },
 ] as const;
 
