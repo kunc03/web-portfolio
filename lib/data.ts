@@ -107,7 +107,7 @@ export const projectsData = [
   {
     title: 'Rent Car',
     description: 'This website exclusively showcases comprehensive car details, spanning from vehicle type, model, and year onwards. Leveraging an open-source API, it epitomizes innovation and accessibility in the automotive realm',
-    tags: ['Typescript, Next.Js, Tailwind'],
+    tags: ['Typescript', 'Next.Js', 'Tailwind'],
     imageUrl: rentCar,
     linkUrl: '/https://car-showcase-eight-hazel.vercel.app/',
   },
