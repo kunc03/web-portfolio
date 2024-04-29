@@ -3,8 +3,6 @@ import { CgWorkAlt } from 'react-icons/cg';
 import { FaReact } from 'react-icons/fa';
 import { LuGraduationCap } from 'react-icons/lu';
 import kopiq from '@/public/kopiQ.png';
-import word from '@/public/data.png';
-import excel from '@/public/excel5.png';
 import dashboard from '@/public/dashboard.png';
 import webImg from '@/public/web.png';
 import webPortfolio from '@/public/webPortfolio.png';
