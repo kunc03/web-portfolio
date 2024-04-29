@@ -7,7 +7,7 @@ import dashboard from '@/public/dashboard.png';
 import webImg from '@/public/web.png';
 import webPortfolio from '@/public/webPortfolio.png';
 import rentCar from '@/public/rentCar.png';
-import shopper from @/public/shopper.png;
+import shopper from '@/public/shopper.png';
 
 export const links = [
   {
