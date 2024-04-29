@@ -9,6 +9,7 @@ import dashboard from '@/public/dashboard.png';
 import webImg from '@/public/web.png';
 import webPortfolio from '@/public/webPortfolio.png';
 import rentCar from '@/public/rentCar.png';
+import shopper from @/public/shopper.png;
 
 export const links = [
   {
@@ -77,6 +78,27 @@ export const projectsData = [
   //   linkUrl: '/',
   // },
   {
+    title: 'OLShop',
+    description: 'The website for this online store showcases product details, alongside user-friendly cart and payment features seamlessly directing users to WhatsApp. Furthermore, it also includes signIn and signOut functionalities.',
+    tags: ['Next.Js', 'Tailwind CSS', 'Firebase'],
+    imageUrl: shopper,
+    linkUrl: 'https://olshop.vercel.app/',
+  },
+  {
+    title: 'Rent Car',
+    description: 'This website exclusively showcases comprehensive car details, spanning from vehicle type, model, and year onwards. Leveraging an open-source API, it epitomizes innovation and accessibility in the automotive realm',
+    tags: ['Typescript', 'Next.Js', 'Tailwind'],
+    imageUrl: rentCar,
+    linkUrl: 'https://car-showcase-eight-hazel.vercel.app/',
+  },
+  {
+    title: 'Web Animelist',
+    description: 'Project ini merupakan project frontend web development pertama saya walaupun belum sempurna tapi setidaknya saya sudah cukup memahami tugas frontend web developer',
+    tags: ['React', 'Next.js', 'Tailwind'],
+    imageUrl: webImg,
+    linkUrl: 'https://animelistbgs.vercel.app/',
+  },
+  {
     title: 'Kedai KopiQ',
     description: 'This project is my first website when I was learning the basics of web programming.',
     tags: ['HTML', 'CSS', 'Javascript'],
@@ -97,20 +119,7 @@ export const projectsData = [
     imageUrl: webPortfolio,
     linkUrl: 'https://web-psmpl.vercel.app/',
   },
-  {
-    title: 'Web Animelist',
-    description: 'Project ini merupakan project frontend web development pertama saya walaupun belum sempurna tapi setidaknya saya sudah cukup memahami tugas frontend web developer',
-    tags: ['React', 'Next.js', 'Tailwind'],
-    imageUrl: webImg,
-    linkUrl: 'https://animelistbgs.vercel.app/',
-  },
-  {
-    title: 'Rent Car',
-    description: 'This website exclusively showcases comprehensive car details, spanning from vehicle type, model, and year onwards. Leveraging an open-source API, it epitomizes innovation and accessibility in the automotive realm',
-    tags: ['Typescript', 'Next.Js', 'Tailwind'],
-    imageUrl: rentCar,
-    linkUrl: 'https://car-showcase-eight-hazel.vercel.app/',
-  },
+  
 ] as const;
 
 export const skillsData = [
