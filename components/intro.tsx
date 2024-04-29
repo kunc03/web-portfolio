@@ -26,7 +26,7 @@ export default function Intro() {
       {/*  Fokus saya sekarang di
         <span className="underline">Ms Word, Ms Excel dan React (Next.js)</span>. */}
       <motion.h1 className="mb-10 mt-4 px-4 text-2xl font-medium !leading-[1.5] sm:text-4xl" initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }}>
-        <span className="font-bold">Hello, I'm Bagus Kuncoro Aziz.</span> A passionate <span className="italic">front-end React (Next.js) Developer </span>dan <span className="italic">admin</span> based in Pekalongan, Indonesia.
+        <span className="font-bold">Hello, I'm Bagus Kuncoro Aziz.</span> A passionate <span className="italic">front-end React (Next.js) Developer </span>based in Pekalongan, Indonesia.
       </motion.h1>
 
       <motion.div initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 text-lg font-medium">
