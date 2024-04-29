@@ -63,14 +63,14 @@ export const experiencesData = [
 export const projectsData = [
   {
     title: 'OLShop',
-    description: 'The website for this online store showcases product details, alongside user-friendly cart and payment features seamlessly directing users to WhatsApp. Furthermore, it also includes signIn and signOut functionalities.',
+    description: 'The website for this online store showcases product details, alongside user-friendly cart, signIn and signOut functionalities and payment features seamlessly directing users to WhatsApp.',
     tags: ['Next.Js', 'Tailwind CSS', 'Firebase'],
     imageUrl: shopper,
     linkUrl: 'https://olshop.vercel.app/',
   },
   {
     title: 'Rent Car',
-    description: 'This website exclusively showcases comprehensive car details, spanning from vehicle type, model, and year onwards. Leveraging an open-source API, it epitomizes innovation and accessibility in the automotive realm',
+    description: 'This website showcases comprehensive car details, spanning from vehicle type, model, and year onwards. Leveraging an open-source API, it epitomizes innovation and accessibility in the automotive realm',
     tags: ['Typescript', 'Next.Js', 'Tailwind'],
     imageUrl: rentCar,
     linkUrl: 'https://car-showcase-eight-hazel.vercel.app/',
