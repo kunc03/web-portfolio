@@ -63,20 +63,6 @@ export const experiencesData = [
 ] as const;
 
 export const projectsData = [
-  // {
-  //   title: 'Data Processing',
-  //   description: 'Processing research data on the influence of adding cinnamon powder doses on the growth of tiger grouper fish, January 2023.',
-  //   tags: ['Microsoft Excel'],
-  //   imageUrl: excel,
-  //   linkUrl: '/',
-  // },
-  // {
-  //   title: 'Shrimp Breeding Report',
-  //   description: 'Creating a Report on the Results of Giant Prawn Breeding during the Internship at BRPI Subang, West Java, January 2022.',
-  //   tags: ['Microsoft Word'],
-  //   imageUrl: word,
-  //   linkUrl: '/',
-  // },
   {
     title: 'OLShop',
     description: 'The website for this online store showcases product details, alongside user-friendly cart and payment features seamlessly directing users to WhatsApp. Furthermore, it also includes signIn and signOut functionalities.',
@@ -129,18 +115,10 @@ export const skillsData = [
   'TypeScript',
   'React',
   'Next.js',
-  // 'Node.js',
+  'Node.js',
   'Git',
   'Tailwind',
   'Prisma',
-  // 'MongoDB',
-  // 'Redux',
-  // 'GraphQL',
-  // 'Apollo',
-  // 'Express',
-  // 'PostgreSQL',
-  // 'Python',
-  // 'Django',
   'Framer Motion',
   'Microsoft Word',
   'Microsoft Excel',
