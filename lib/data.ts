@@ -8,6 +8,7 @@ import webImg from '@/public/web.png';
 import webPortfolio from '@/public/webPortfolio.png';
 import rentCar from '@/public/rentCar.png';
 import shopper from '@/public/shopper.png';
+import store from '@/public/store.png';
 
 export const links = [
   {
@@ -61,6 +62,13 @@ export const experiencesData = [
 ] as const;
 
 export const projectsData = [
+  {
+    title: 'Kunc Store',
+    description: 'An online shop website that showcases products, authentication, search, product details, and payment. Additionally, I will add an admin dashboard.',
+    tags: ['Next.Js', 'Tailwind CSS', 'Firebase'],
+    imageUrl: store,
+    linkUrl: 'https://kunc-store.vercel.app/',
+  },
   {
     title: 'OLShop',
     description: 'The website for this online store showcases product details, alongside user-friendly cart, signIn and signOut functionalities and payment features seamlessly directing users to WhatsApp.',
