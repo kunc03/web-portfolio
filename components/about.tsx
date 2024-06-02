@@ -10,7 +10,7 @@ export default function About() {
 
   return (
     <motion.section
-      className="pb-28 sm:pb-24 md:mb-32 sm:mb-0 max-w-[45rem] text-center leading-8 md:scroll-mt-32 scroll-mt-28"
+      className="pb-28 sm:pb-24 md:mb-32 sm:mb-0 max-w-[45rem] text-center leading-8 md:scroll-mt-[150px] scroll-mt-32"
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.175 }}
@@ -23,11 +23,11 @@ export default function About() {
         <span className="font-medium"> Student Regiment (Menwa)</span> organization and I had the opportunity to serve as <span className="font-medium">teaching assistant</span> for 2 semesters.
       </p>
 
-      <p className="mb-3 text-justify">
+      {/* <p className="mb-3 text-justify">
         Throughout my studies, I developed expertise in creating reports related to the growth and production results of fisheries. During my academic journey, I consistently dealt with report writing and frequently operated{' '}
         <span className="font-medium">Microsoft Word </span>
         and <span className="font-medium">Microsoft Excel</span>. As a result, I am quite familiar with these tools and am quick to learn in this field
-      </p>
+      </p> */}
 
       <p className="mb-3 text-justify">
         After graduating with a<span className="font-medium"> Bachelor's degree in Fisheries</span>, I developed an interest in programming, specifically in<span className="font-medium"> frontend web development</span>.

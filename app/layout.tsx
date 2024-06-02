@@ -25,7 +25,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ActiveSectionContextProvider>
           <Header />
           {children}
-
           <Toaster position="top-right" />
           <Footer />
         </ActiveSectionContextProvider>
