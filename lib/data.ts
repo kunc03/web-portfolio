@@ -83,13 +83,13 @@ export const projectsData = [
     imageUrl: rentCar,
     linkUrl: 'https://car-showcase-eight-hazel.vercel.app/',
   },
-  {
-    title: 'Web Animelist',
-    description: 'Project ini merupakan project frontend web development pertama saya walaupun belum sempurna tapi setidaknya saya sudah cukup memahami tugas frontend web developer',
-    tags: ['React', 'Next.js', 'Tailwind'],
-    imageUrl: webImg,
-    linkUrl: 'https://animelistbgs.vercel.app/',
-  },
+  // {
+  //   title: 'Web Animelist',
+  //   description: 'Project ini merupakan project frontend web development pertama saya walaupun belum sempurna tapi setidaknya saya sudah cukup memahami tugas frontend web developer',
+  //   tags: ['React', 'Next.js', 'Tailwind'],
+  //   imageUrl: webImg,
+  //   linkUrl: 'https://animelistbgs.vercel.app/',
+  // },
   {
     title: 'Kedai KopiQ',
     description: 'This project is my first website when I was learning the basics of web programming.',
@@ -97,20 +97,20 @@ export const projectsData = [
     imageUrl: kopiq,
     linkUrl: 'https://kopiq.vercel.app/',
   },
-  {
-    title: 'Responsive Dashboard',
-    description: 'I created a responsive dashboard project to sharpen my basic skills in HTML, CSS, and JavaScript. Although this project is not yet perfect, at least I have a good understanding of layouting.',
-    tags: ['HTML', 'CSS', 'Javascript'],
-    imageUrl: dashboard,
-    linkUrl: 'https://dashboard1-xi.vercel.app/',
-  },
-  {
-    title: 'Web Portfolio',
-    description: 'I crafted an simple web portfolio utilizing HTML, CSS, and JavaScript. My learning journey was guided by insightful video tutorials available on YouTube.',
-    tags: ['HTML', 'CSS', 'Javascript'],
-    imageUrl: webPortfolio,
-    linkUrl: 'https://web-psmpl.vercel.app/',
-  },
+  // {
+  //   title: 'Responsive Dashboard',
+  //   description: 'I created a responsive dashboard project to sharpen my basic skills in HTML, CSS, and JavaScript. Although this project is not yet perfect, at least I have a good understanding of layouting.',
+  //   tags: ['HTML', 'CSS', 'Javascript'],
+  //   imageUrl: dashboard,
+  //   linkUrl: 'https://dashboard1-xi.vercel.app/',
+  // },
+  // {
+  //   title: 'Web Portfolio',
+  //   description: 'I crafted an simple web portfolio utilizing HTML, CSS, and JavaScript. My learning journey was guided by insightful video tutorials available on YouTube.',
+  //   tags: ['HTML', 'CSS', 'Javascript'],
+  //   imageUrl: webPortfolio,
+  //   linkUrl: 'https://web-psmpl.vercel.app/',
+  // },
   
 ] as const;
 
