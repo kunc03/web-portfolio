@@ -65,14 +65,14 @@ export const projectsData = [
   {
     title: 'Kunc Store',
     description: 'An online shop website that showcases products, authentication, search, product details, and payment. Additionally, I will add an admin dashboard.',
-    tags: ['Next.Js', 'Tailwind CSS', 'Firebase'],
+    tags: ['Next.Js', 'Tailwind CSS'],
     imageUrl: store,
     linkUrl: 'https://kunc-store.vercel.app/',
   },
   {
     title: 'OLShop',
     description: 'The website for this online store showcases product details, alongside user-friendly cart, signIn and signOut functionalities and payment features seamlessly directing users to WhatsApp.',
-    tags: ['Next.Js', 'Tailwind CSS', 'Firebase'],
+    tags: ['Next.Js', 'Tailwind CSS'],
     imageUrl: shopper,
     linkUrl: 'https://olshop.vercel.app/',
   },
