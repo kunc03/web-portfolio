@@ -1,133 +1,171 @@
-import React from 'react';
-import { CgWorkAlt } from 'react-icons/cg';
-import { FaReact } from 'react-icons/fa';
-import { LuGraduationCap } from 'react-icons/lu';
-import kopiq from '@/public/kopiQ.png';
-import dashboard from '@/public/dashboard.png';
-import webImg from '@/public/web.png';
-import webPortfolio from '@/public/webPortfolio.png';
-import rentCar from '@/public/rentCar.png';
-import shopper from '@/public/shopper.png';
-import store from '@/public/store.png';
+import React from "react";
+import { CgWorkAlt } from "react-icons/cg";
+import { FaReact } from "react-icons/fa";
+import { LuGraduationCap } from "react-icons/lu";
+import kopiq from "@/public/kopiQ.png";
+import jprefund from "@/public/jprefund.png";
+import manrisk from "@/public/manrisk.png";
+import dclinic from "@/public/dclinic.png";
+import rentCar from "@/public/rentCar.png";
+import shopper from "@/public/shopper.png";
+import store from "@/public/store.png";
 
 export const links = [
   {
-    name: 'Home',
-    hash: '#home',
+    name: "Home",
+    hash: "#home",
   },
   {
-    name: 'About',
-    hash: '#about',
+    name: "About",
+    hash: "#about",
   },
   {
-    name: 'Projects',
-    hash: '#projects',
+    name: "Projects",
+    hash: "#projects",
   },
   {
-    name: 'Skills',
-    hash: '#skills',
+    name: "Skills",
+    hash: "#skills",
   },
-  // {
-  //   name: 'Experience',
-  //   hash: '#experience',
-  // },
   {
-    name: 'Contact',
-    hash: '#contact',
+    name: "Experience",
+    hash: "#experience",
+  },
+  {
+    name: "Contact",
+    hash: "#contact",
   },
 ] as const;
 
 export const experiencesData = [
   {
-    title: 'Graduated bootcamp',
-    location: 'Miami, FL',
-    description: 'I graduated after 6 months of studying. I immediately found a job as a front-end developer.',
+    title: "Graduated bootcamp",
+    location: "Miami, FL",
+    description:
+      "I graduated after 6 months of studying. I immediately found a job as a front-end developer.",
     icon: React.createElement(LuGraduationCap),
-    date: '2019',
+    date: "2019",
   },
   {
-    title: 'Front-End Developer',
-    location: 'Orlando, FL',
-    description: 'I worked as a front-end developer for 2 years in 1 job and 1 year in another job. I also upskilled to the full stack.',
+    title: "Front-End Developer",
+    location: "Orlando, FL",
+    description:
+      "I worked as a front-end developer for 2 years in 1 job and 1 year in another job. I also upskilled to the full stack.",
     icon: React.createElement(CgWorkAlt),
-    date: '2019 - 2021',
+    date: "2019 - 2021",
   },
   {
-    title: 'Full-Stack Developer',
-    location: 'Houston, TX',
-    description: "I'm now a full-stack developer working as a freelancer. My stack includes React, Next.js, TypeScript, Tailwind, Prisma and MongoDB. I'm open to full-time opportunities.",
+    title: "Full-Stack Developer",
+    location: "Houston, TX",
+    description:
+      "I'm now a full-stack developer working as a freelancer. My stack includes React, Next.js, TypeScript, Tailwind, Prisma and MongoDB. I'm open to full-time opportunities.",
     icon: React.createElement(FaReact),
-    date: '2021 - present',
+    date: "2021 - present",
   },
 ] as const;
 
 export const projectsData = [
   {
-    title: 'Kunc Store',
-    description: 'An online shop website that showcases products, authentication, search, product details, and payment. Additionally, I will add an admin dashboard.',
-    tags: ['Next.Js', 'Tailwind CSS'],
+    title: "SIMRIS Infovesta",
+    description:
+      "A web to manage and display data with tables and charts, making it easier to view and organize investment data.",
+    tags: [
+      "Nuxt.js",
+      "Tailwind CSS",
+      "Pinia",
+      "html2canvas",
+      "jspdf",
+      "PrimeVue",
+      "chart.js",
+      "date-fns"
+    ],
+    imageUrl: manrisk,
+    linkUrl: "https://manrisk-test.vercel.app/",
+  },
+  {
+    title: "Diamond Clinic",
+    description:
+      "A web that showcases various skincare and beauty treatments with images.",
+    tags: [
+      "Nuxt.js",
+      "Tailwind CSS",
+      "Pinia",
+      "Service Workers",
+      "PrimeVue",
+    ],
+    imageUrl: dclinic,
+    linkUrl: "https://clinic-test-v1.vercel.app/",
+  },
+  {
+    title: "JPrefund",
+    description:
+      "A web that allows international tourists shopping in Japan to easily claim tax refunds by submitting purchase details online.",
+    tags: [
+      "Next.js",
+      "Tailwind CSS",
+      "Zod",
+      "Zustand",
+      "Framer Motion",
+      "GSAP",
+      "@zxing/browser",
+    ],
+    imageUrl: jprefund,
+    linkUrl: "https://jprefund-test.vercel.app/",
+  },
+  {
+    title: "Kunc Store",
+    description:
+      "An online shop website that showcases products, authentication, search, product details, and payment. Additionally, I will add an admin dashboard.",
+    tags: ["Next.Js", "Tailwind CSS"],
     imageUrl: store,
-    linkUrl: 'https://kunc-store.vercel.app/',
+    linkUrl: "https://kunc-store.vercel.app/",
   },
   {
-    title: 'OLShop',
-    description: 'The website for this online store showcases product details, alongside user-friendly cart, signIn and signOut functionalities and payment features seamlessly directing users to WhatsApp.',
-    tags: ['Next.Js', 'Tailwind CSS'],
+    title: "OLShop",
+    description:
+      "The website for this online store showcases product details, alongside user-friendly cart, signIn and signOut functionalities and payment features seamlessly directing users to WhatsApp.",
+    tags: ["Next.Js", "Tailwind CSS"],
     imageUrl: shopper,
-    linkUrl: 'https://olshop.vercel.app/',
+    linkUrl: "https://olshop.vercel.app/",
   },
   {
-    title: 'Rent Car',
-    description: 'This website showcases comprehensive car details, spanning from vehicle type, model, and year onwards. Leveraging an open-source API, it epitomizes innovation and accessibility in the automotive realm',
-    tags: ['Typescript', 'Next.Js', 'Tailwind'],
+    title: "Rent Car",
+    description:
+      "Showcases comprehensive car details, spanning from vehicle type, model, and year onwards. Leveraging an open-source API, it epitomizes innovation and accessibility in the automotive realm",
+    tags: ["Next.Js", "Tailwind css"],
     imageUrl: rentCar,
-    linkUrl: 'https://car-showcase-eight-hazel.vercel.app/',
+    linkUrl: "https://car-showcase-eight-hazel.vercel.app/",
   },
-  // {
-  //   title: 'Web Animelist',
-  //   description: 'Project ini merupakan project frontend web development pertama saya walaupun belum sempurna tapi setidaknya saya sudah cukup memahami tugas frontend web developer',
-  //   tags: ['React', 'Next.js', 'Tailwind'],
-  //   imageUrl: webImg,
-  //   linkUrl: 'https://animelistbgs.vercel.app/',
-  // },
   {
-    title: 'Kedai KopiQ',
-    description: 'This project is my first website when I was learning the basics of web programming.',
-    tags: ['HTML', 'CSS', 'Javascript'],
+    title: "Kedai KopiQ",
+    description:
+      "This project is my first website when I was learning the basics of web programming.",
+    tags: ["HTML", "CSS", "Javascript"],
     imageUrl: kopiq,
-    linkUrl: 'https://kopiq.vercel.app/',
+    linkUrl: "https://kopiq.vercel.app/",
   },
-  // {
-  //   title: 'Responsive Dashboard',
-  //   description: 'I created a responsive dashboard project to sharpen my basic skills in HTML, CSS, and JavaScript. Although this project is not yet perfect, at least I have a good understanding of layouting.',
-  //   tags: ['HTML', 'CSS', 'Javascript'],
-  //   imageUrl: dashboard,
-  //   linkUrl: 'https://dashboard1-xi.vercel.app/',
-  // },
-  // {
-  //   title: 'Web Portfolio',
-  //   description: 'I crafted an simple web portfolio utilizing HTML, CSS, and JavaScript. My learning journey was guided by insightful video tutorials available on YouTube.',
-  //   tags: ['HTML', 'CSS', 'Javascript'],
-  //   imageUrl: webPortfolio,
-  //   linkUrl: 'https://web-psmpl.vercel.app/',
-  // },
-  
 ] as const;
 
 export const skillsData = [
-  'HTML',
-  'CSS',
-  'JavaScript',
-  'TypeScript',
-  'React',
-  'Next.js',
-  'Node.js',
-  'Git',
-  'Tailwind',
-  'Prisma',
-  'Framer Motion',
-  'Microsoft Word',
-  'Microsoft Excel',
-  'Corel Draw',
-  'Affinity Designer',
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "Next.js",
+  "Git",
+  "Tailwind",
+  "Prisma",
+  "Framer Motion",
+  "Zod",
+  "Zustand",
+  "Pinia",
+  "Vue.js",
+  "Nuxt.js",
+  "Angular",
+  "Bootstrap",
+  "PrimeVue",
+  "Shadcn UI",
+  "Service Workers",
+  "Internationalization (i18n)",
 ] as const;
