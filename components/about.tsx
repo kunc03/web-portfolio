@@ -10,7 +10,7 @@ export default function About() {
 
   return (
     <motion.section
-      className="pb-20 sm:pb-0 max-w-[45rem] h-auto sm:h-screen text-center leading-4 sm:leading-8 md:scroll-mt-[130px] scroll-mt-28 sm:text-[16px] text-[2.286vw]"
+      className="pb-20 sm:pb-0 max-w-[45rem] h-auto sm:h-screen text-center leading-4 sm:leading-8 scroll-mt-28 sm:text-[16px] text-[2.286vw]"
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.175 }}
@@ -20,16 +20,13 @@ export default function About() {
       <SectionHeading>About me</SectionHeading>
       <p className="mb-3 text-justify">
         I'm a <span className="font-medium">Frontend Web Developer</span> with
-        over
         <span className="font-medium">
           {" "}
-          1.5 years of professional experience
-        </span>{" "}
-        at
-        <span className="font-medium"> PT Dynamic Talenavi</span>, where I
-        started as an intern and transitioned into a full-time role. My daily
-        work revolves around building{" "}
-        <span className="italic">interactive, responsive,</span> and
+          over a year of professional experience
+        </span>
+        , starting as an intern and growing into a full-time role. My daily work
+        involves building{" "}
+        <span className="italic">interactive, responsive</span>, and
         <span className="italic"> accessible web applications</span> that
         prioritize user experience.
       </p>
@@ -46,13 +43,20 @@ export default function About() {
       </p>
 
       <p className="mb-3 text-justify">
-        During my time at university, I participated in a <span className="font-medium">leadership-focused student organization</span> and served as a <span className="font-medium">teaching assistant</span> for two semesters. These experiences played a key role in building the discipline, teamwork, and communication skills I carry into my professional career today.
+        During my time at university, I participated in a{" "}
+        <span className="font-medium">
+          leadership-focused student organization
+        </span>{" "}
+        and served as a <span className="font-medium">teaching assistant</span>{" "}
+        for two semesters. These experiences played a key role in building the
+        discipline, teamwork, and communication skills I carry into my
+        professional career today.
       </p>
 
       <p className="mb-3 text-justify">
         Whether it's collaborating with a team or working independently, I
         thrive on turning ideas into
-        <span className="italic">functional</span> and{" "}
+        <span className="italic"> functional</span> and{" "}
         <span className="italic">aesthetic digital experiences</span>.
       </p>
     </motion.section>

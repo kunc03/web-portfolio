@@ -22,9 +22,6 @@ export default function Intro() {
           <Image width={192} height={192} quality={95} priority={true} src={profile} alt="Kunc portrait" className="h-28 w-28 rounded-full object-cover border-[0.35rem] border-white shadow-xl" />
         </motion.div>
       </div>
-      {/* I'm a <span className="font-bold">Frontend Developer</span> */}
-      {/*  Fokus saya sekarang di
-        <span className="underline">Ms Word, Ms Excel dan React (Next.js)</span>. */}
       <motion.h1 className="mb-10 mt-[2.286vw] sm:mt-4 px-[2.286vw] sm:px-4 text-[5.143vw] font-medium !leading-[1.5] sm:text-4xl" initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }}>
         <span className="font-bold">Hello, I'm Bagus Kuncoro Aziz.</span> A passionate <span className="italic">front-end Developer </span>based in Pekalongan, Indonesia.
       </motion.h1>
@@ -51,7 +48,7 @@ export default function Intro() {
         <div className="flex gap-2">
           <a
             className="bg-white text-gray-700 hover:text-gray-950 px-7 py-3 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15]  active:scale-105 transition cursor-pointer border border-black/10 dark:text-white/60 dark:bg-white/10 "
-            href="https://www.linkedin.com/in/bagus-kuncoro-aziz-851636275/"
+            href="https://www.linkedin.com/in/bagus-kuncoro-851636275/"
             target="_blank"
           >
             <BsLinkedin />

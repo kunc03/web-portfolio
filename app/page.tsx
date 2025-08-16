@@ -1,9 +1,15 @@
-import About from '@/components/about';
-import Contact from '@/components/contact';
 import Intro from '@/components/intro';
-import Projects from '@/components/projects';
-import SectionDivider from '@/components/section-divider';
+import About from '@/components/about';
 import Skills from '@/components/skills';
+import Contact from '@/components/contact';
+import Projects from '@/components/projects';
+import Experiences from '@/components/experiences';
+import SectionDivider from '@/components/section-divider';
+import 'primereact/resources/themes/lara-light-blue/theme.css'; 
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
+
 
 export default function Home() {
   return (
@@ -13,6 +19,7 @@ export default function Home() {
       <About />
       <Projects />
       <Skills />
+      <Experiences />
       <Contact />
     </div>
   );

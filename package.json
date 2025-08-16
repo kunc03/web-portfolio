@@ -18,6 +18,8 @@
     "next": "^14.0.4",
     "nodemailer": "^6.9.13",
     "pg": "^8.11.5",
+    "primeicons": "^7.0.0",
+    "primereact": "^10.9.6",
     "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",

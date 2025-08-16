@@ -8,6 +8,9 @@ import manrisk from "@/public/manrisk.png";
 import dclinic from "@/public/dclinic.png";
 import rentCar from "@/public/rentCar.png";
 import shopper from "@/public/shopper.png";
+import gachaEndoji from "@/public/gacha-endoji.png";
+import gachaRogaining from "@/public/rogaining.png";
+import aichiGurutto from "@/public/aichi-gurutto.png";
 import store from "@/public/store.png";
 
 export const links = [
@@ -28,8 +31,8 @@ export const links = [
     hash: "#skills",
   },
   {
-    name: "Experience",
-    hash: "#experience",
+    name: "Experiences",
+    hash: "#experiences",
   },
   {
     name: "Contact",
@@ -39,32 +42,81 @@ export const links = [
 
 export const experiencesData = [
   {
-    title: "Graduated bootcamp",
-    location: "Miami, FL",
+    date: "Jul 2024 – Sep 2024",
+    title: "Frontend Developer Intern",
+    company: "PT Dynamic Talenta Navigator",
+    location: "Onsite · Semarang, Indonesia",
     description:
-      "I graduated after 6 months of studying. I immediately found a job as a front-end developer.",
-    icon: React.createElement(LuGraduationCap),
-    date: "2019",
+      "Contributed to the development of web features using Next.js, Zustand, Zod, and Shadcn UI. Focused on building reusable components and handling form validation with modern best practices.",
+    techStack: ["Next.js", "Zustand", "Zod", "Tailwind CSS", "Shadcn UI", "i18n"],
+    icon: "pi pi-book",
   },
   {
-    title: "Front-End Developer",
-    location: "Orlando, FL",
+    date: "Oct 2024 – Present",
+    title: "Frontend Developer",
+    company: "PT Dynamic Talenta Navigator",
+    location: "Onsite · Semarang, Indonesia",
     description:
-      "I worked as a front-end developer for 2 years in 1 job and 1 year in another job. I also upskilled to the full stack.",
-    icon: React.createElement(CgWorkAlt),
-    date: "2019 - 2021",
-  },
-  {
-    title: "Full-Stack Developer",
-    location: "Houston, TX",
-    description:
-      "I'm now a full-stack developer working as a freelancer. My stack includes React, Next.js, TypeScript, Tailwind, Prisma and MongoDB. I'm open to full-time opportunities.",
-    icon: React.createElement(FaReact),
-    date: "2021 - present",
+      "Led frontend development for modern web applications using Next.js, Nuxt.js, and Angular. Integrated component libraries like PrimeVue, focusing on performance and maintainability.",
+    techStack: [
+      "Nuxt.js",
+      "Angular",
+      "Tailwind CSS",
+      "Pinia",
+      "PrimeVue",
+      "Service Workers",
+      "Angular"
+    ],
+    icon: "pi pi-briefcase",
   },
 ] as const;
 
 export const projectsData = [
+  {
+    title: "Aichi Gurutto",
+    description:
+      "An interactive gacha web app, allowing users to earn points and unlock characters for voucher rewards.",
+    tags: [
+      "Nuxt.js",
+      "Tailwind CSS",
+      "Pinia",
+      "Service Workers",
+      "PrimeVue",
+      "Swiper",
+    ],
+    imageUrl: aichiGurutto,
+    linkUrl: "https://aichi-gurutto.dela-kuji.jp/",
+  },
+  {
+    title: "Rogaining Endoji",
+    description:
+      "A custom gacha app, combining exploration with point-based rewards and collectible characters.",
+    tags: [
+      "Nuxt.js",
+      "Tailwind CSS",
+      "Pinia",
+      "Service Workers",
+      "PrimeVue",
+      "Swiper",
+    ],
+    imageUrl: gachaRogaining,
+    linkUrl: "https://rogaining-endoji.dela-kuji.jp/",
+  },
+  {
+    title: "Endoji Shotengai",
+    description:
+      "A gacha-based web app, where users engage with the area to collect characters and redeem prizes.",
+    tags: [
+      "Nuxt.js",
+      "Tailwind CSS",
+      "Pinia",
+      "Service Workers",
+      "PrimeVue",
+      "Swiper",
+    ],
+    imageUrl: gachaEndoji,
+    linkUrl: "https://endo-ji-shotengai.dela-kuji.jp/",
+  },
   {
     title: "SIMRIS Infovesta",
     description:
@@ -77,7 +129,7 @@ export const projectsData = [
       "jspdf",
       "PrimeVue",
       "chart.js",
-      "date-fns"
+      "date-fns",
     ],
     imageUrl: manrisk,
     linkUrl: "https://manrisk-test.vercel.app/",
@@ -86,13 +138,7 @@ export const projectsData = [
     title: "Diamond Clinic",
     description:
       "A web that showcases various skincare and beauty treatments with images.",
-    tags: [
-      "Nuxt.js",
-      "Tailwind CSS",
-      "Pinia",
-      "Service Workers",
-      "PrimeVue",
-    ],
+    tags: ["Nuxt.js", "Tailwind CSS", "Pinia", "Service Workers", "PrimeVue"],
     imageUrl: dclinic,
     linkUrl: "https://clinic-test-v1.vercel.app/",
   },
