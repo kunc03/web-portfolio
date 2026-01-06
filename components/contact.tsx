@@ -1,7 +1,7 @@
 'use client';
 
 import { useSectionInView } from '@/lib/hooks';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import SectionHeading from './section-heading';
 import { motion } from 'framer-motion';
 import { sendEmail } from '@/actions/sendEmail';
@@ -10,6 +10,12 @@ import toast from 'react-hot-toast';
 
 export default function Contact() {
   const { ref } = useSectionInView('Contact');
+  const [senderEmail, setSenderEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const isFormFilled = useMemo(() => {
+    return senderEmail.trim().length > 0 && message.trim().length > 0;
+  }, [message, senderEmail]);
 
   return (
     <motion.section id="contact" ref={ref} className="mb-20 sm:mb-28 w-[min(100%, 38rem)] scroll-mt-28 text-center" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }}>
@@ -43,6 +49,7 @@ export default function Contact() {
           required
           maxLength={500}
           placeholder="Your email"
+          onChange={(e) => setSenderEmail(e.currentTarget.value)}
         />
         <textarea
           name="message"
@@ -50,9 +57,10 @@ export default function Contact() {
           required
           maxLength={5000}
           placeholder="Your message"
+          onChange={(e) => setMessage(e.currentTarget.value)}
         />
 
-        <SubmitBtn />
+        <SubmitBtn disabled={!isFormFilled} />
       </form>
 
       

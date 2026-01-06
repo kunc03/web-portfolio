@@ -33,7 +33,7 @@ const Experiences = () => {
       <SectionHeading>My Experiences</SectionHeading>
 
       <Timeline
-        value={experiencesData}
+        value={[...experiencesData]}
         align="alternate"
         className="pl-[1.143vw] sm:pl-2"
         opposite={(item) => (
