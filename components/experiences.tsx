@@ -36,7 +36,7 @@ const Experiences = ({ experiences }: { experiences: ExperienceItem[] }) => {
               {item.description}
             </p>
             <div className="flex flex-wrap gap-[1.143vw] sm:gap-2 mt-[1.143vw] sm:mt-2">
-              {item.techStack.map((tech: string) => (
+              {(item.techStack as string[]).filter((tech: string, idx: number, arr: string[]) => arr.indexOf(tech) === idx).map((tech: string) => (
                 <span
                   key={tech}
                   className="px-[1.143vw] py-[0.571vw] sm:px-2 sm:py-1 text-[1.714vw] sm:text-xs dark:bg-white/10 bg-white dark:bg-zinc-800 border border-gray-200 border-black/[0.1] text-gray-700 dark:text-white/70 rounded-full"

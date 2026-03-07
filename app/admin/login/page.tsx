@@ -4,7 +4,7 @@ export default function AdminLoginPage({ searchParams }: { searchParams?: { erro
   const error = searchParams?.error ?? null;
 
   return (
-    <main className="min-h-dvh flex items-center justify-center px-4">
+    <main className="flex items-center justify-center h-screen w-full">
       <div className="w-full max-w-md bg-white dark:bg-white/10 border border-black/10 dark:border-white/10 rounded-2xl p-6">
         <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Admin Login</h1>
         <p className="text-sm text-gray-600 dark:text-white/70 mt-1">Masuk untuk mengelola menu.</p>

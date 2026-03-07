@@ -1,13 +1,13 @@
 import { getAdminSession } from '@/lib/admin-auth';
+import { updateAbout } from '@/lib/about';
 import { isDbConfigured } from '@/lib/db';
-import { createSkill } from '@/lib/skills';
 import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
 function getReturnUrl(req: NextRequest) {
-  const fallback = new URL('/admin/skills', req.url);
+  const fallback = new URL('/admin/about', req.url);
   const referer = req.headers.get('referer');
   if (!referer) return fallback;
   try {
@@ -25,12 +25,10 @@ export async function POST(req: NextRequest) {
   if (!isDbConfigured()) return NextResponse.redirect(getReturnUrl(req), 303);
 
   const formData = await req.formData();
-  await createSkill({
-    name: formData.get('name'),
-    isVisible: formData.get('isVisible'),
-  });
+  await updateAbout({ paragraphs: formData.get('content') });
 
   revalidatePath('/');
-  revalidatePath('/admin/skills');
+  revalidatePath('/admin/about');
   return NextResponse.redirect(getReturnUrl(req), 303);
 }
+

@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
 import SectionHeading from "./section-heading";
 import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
 
-export default function About() {
+export default function About({ paragraphs = [] }: { paragraphs?: string[] }) {
   const { ref } = useSectionInView("#about");
 
   return (
@@ -18,47 +17,11 @@ export default function About() {
       ref={ref}
     >
       <SectionHeading>About me</SectionHeading>
-      <p className="mb-3 text-justify">
-        I'm a <span className="font-medium">Frontend Web Developer</span> with
-        <span className="font-medium">
-          {" "}
-          over a year of professional experience
-        </span>
-        , starting as an intern and growing into a full-time role. My daily work
-        involves building{" "}
-        <span className="italic">interactive, responsive</span>, and
-        <span className="italic"> accessible web applications</span> that
-        prioritize user experience.
-      </p>
-
-      <p className="mb-3 text-justify">
-        My journey into tech began after I graduated with a
-        <span className="font-medium"> Bachelor's degree in Fisheries</span>{" "}
-        from Pekalongan University. While my academic background isn't in
-        computer science, my
-        <span className="italic">passion for problem-solving</span> and
-        continuous learning led me to explore programming— particularly{" "}
-        <span className="font-medium">frontend development</span>. Since then,
-        I’ve been committed to sharpening my skills in modern web technologies.
-      </p>
-
-      <p className="mb-3 text-justify">
-        During my time at university, I participated in a{" "}
-        <span className="font-medium">
-          leadership-focused student organization
-        </span>{" "}
-        and served as a <span className="font-medium">teaching assistant</span>{" "}
-        for two semesters. These experiences played a key role in building the
-        discipline, teamwork, and communication skills I carry into my
-        professional career today.
-      </p>
-
-      <p className="mb-3 text-justify">
-        Whether it's collaborating with a team or working independently, I
-        thrive on turning ideas into
-        <span className="italic"> functional</span> and{" "}
-        <span className="italic">aesthetic digital experiences</span>.
-      </p>
+      {paragraphs.map((text, idx) => (
+        <p key={idx} className="mb-3 text-justify">
+          {text}
+        </p>
+      ))}
     </motion.section>
   );
 }

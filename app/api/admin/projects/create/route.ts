@@ -31,7 +31,6 @@ export async function POST(req: NextRequest) {
     tags: formData.get('tags'),
     imageKey: formData.get('imageKey'),
     linkUrl: formData.get('linkUrl'),
-    sortOrder: formData.get('sortOrder'),
     isVisible: formData.get('isVisible'),
   });
 

@@ -23,7 +23,7 @@ const DEFAULT_PROJECTS: Array<Omit<StoredProject, 'id'>> = [
     tags: ['Nuxt.js', 'Tailwind CSS', 'Pinia', 'Service Workers', 'PrimeVue', 'Swiper'],
     imageKey: 'aichiGurutto',
     linkUrl: 'https://aichi-gurutto.dela-kuji.jp/',
-    sortOrder: 10,
+    sortOrder: 1,
     isVisible: true,
   },
   {
@@ -32,7 +32,7 @@ const DEFAULT_PROJECTS: Array<Omit<StoredProject, 'id'>> = [
     tags: ['Nuxt.js', 'Tailwind CSS', 'Pinia', 'Service Workers', 'PrimeVue', 'Swiper'],
     imageKey: 'gachaRogaining',
     linkUrl: 'https://rogaining-endoji.dela-kuji.jp/',
-    sortOrder: 20,
+    sortOrder: 2,
     isVisible: true,
   },
   {
@@ -41,7 +41,7 @@ const DEFAULT_PROJECTS: Array<Omit<StoredProject, 'id'>> = [
     tags: ['Nuxt.js', 'Tailwind CSS', 'Pinia', 'Service Workers', 'PrimeVue', 'Swiper'],
     imageKey: 'gachaEndoji',
     linkUrl: 'https://endo-ji-shotengai.dela-kuji.jp/',
-    sortOrder: 30,
+    sortOrder: 3,
     isVisible: true,
   },
   {
@@ -50,7 +50,7 @@ const DEFAULT_PROJECTS: Array<Omit<StoredProject, 'id'>> = [
     tags: ['Nuxt.js', 'Tailwind CSS', 'Pinia', 'html2canvas', 'jspdf', 'PrimeVue', 'chart.js', 'date-fns'],
     imageKey: 'manrisk',
     linkUrl: 'https://manrisk-test.vercel.app/',
-    sortOrder: 40,
+    sortOrder: 4,
     isVisible: true,
   },
   {
@@ -59,7 +59,7 @@ const DEFAULT_PROJECTS: Array<Omit<StoredProject, 'id'>> = [
     tags: ['Nuxt.js', 'Tailwind CSS', 'Pinia', 'Service Workers', 'PrimeVue'],
     imageKey: 'dclinic',
     linkUrl: 'https://clinic-test-v1.vercel.app/',
-    sortOrder: 50,
+    sortOrder: 5,
     isVisible: true,
   },
   {
@@ -68,7 +68,7 @@ const DEFAULT_PROJECTS: Array<Omit<StoredProject, 'id'>> = [
     tags: ['Next.js', 'Tailwind CSS', 'Zod', 'Zustand', 'Framer Motion', 'GSAP', '@zxing/browser'],
     imageKey: 'jprefund',
     linkUrl: 'https://jprefund-test.vercel.app/',
-    sortOrder: 60,
+    sortOrder: 6,
     isVisible: true,
   },
   {
@@ -77,7 +77,7 @@ const DEFAULT_PROJECTS: Array<Omit<StoredProject, 'id'>> = [
     tags: ['Next.Js', 'Tailwind CSS'],
     imageKey: 'store',
     linkUrl: 'https://kunc-store.vercel.app/',
-    sortOrder: 70,
+    sortOrder: 7,
     isVisible: true,
   },
   {
@@ -86,7 +86,7 @@ const DEFAULT_PROJECTS: Array<Omit<StoredProject, 'id'>> = [
     tags: ['Next.Js', 'Tailwind CSS'],
     imageKey: 'shopper',
     linkUrl: 'https://olshop.vercel.app/',
-    sortOrder: 80,
+    sortOrder: 8,
     isVisible: true,
   },
   {
@@ -95,7 +95,7 @@ const DEFAULT_PROJECTS: Array<Omit<StoredProject, 'id'>> = [
     tags: ['Next.Js', 'Tailwind css'],
     imageKey: 'rentCar',
     linkUrl: 'https://car-showcase-eight-hazel.vercel.app/',
-    sortOrder: 90,
+    sortOrder: 9,
     isVisible: true,
   },
   {
@@ -104,7 +104,7 @@ const DEFAULT_PROJECTS: Array<Omit<StoredProject, 'id'>> = [
     tags: ['HTML', 'CSS', 'Javascript'],
     imageKey: 'kopiq',
     linkUrl: 'https://kopiq.vercel.app/',
-    sortOrder: 100,
+    sortOrder: 10,
     isVisible: true,
   },
 ];
@@ -241,8 +241,8 @@ export async function createProject(input: {
   tags: unknown;
   imageKey: unknown;
   linkUrl: unknown;
-  sortOrder: unknown;
-  isVisible: unknown;
+  sortOrder?: unknown;
+  isVisible?: unknown;
 }) {
   if (!isDbConfigured()) throw new Error('Database is not configured');
   await ensureProjectsTable();
@@ -252,10 +252,16 @@ export async function createProject(input: {
   const tags = normalizeTags(input.tags);
   const imageKey = normalizeImageKey(input.imageKey);
   const linkUrl = normalizeText(input.linkUrl, 'Link', 500);
-  const sortOrder = normalizeSortOrder(input.sortOrder);
-  const isVisible = normalizeIsVisible(input.isVisible);
+  const sortOrder =
+    input.sortOrder === undefined || input.sortOrder === null || String(input.sortOrder).trim() === ''
+      ? null
+      : normalizeSortOrder(input.sortOrder);
+  const isVisible = normalizeIsVisible(input.isVisible ?? true);
 
   const pool = getDbPool();
+  const finalSortOrder =
+    sortOrder ??
+    Number((await pool.query<{ next_sort_order: number }>('SELECT COALESCE(MAX(sort_order), 0) + 1 AS next_sort_order FROM projects;')).rows[0]?.next_sort_order ?? 1);
   await pool.query(
     `
       INSERT INTO projects
@@ -263,7 +269,7 @@ export async function createProject(input: {
       VALUES
         ($1, $2, $3, $4, $5, $6, $7)
     `,
-    [title, description, JSON.stringify(tags), imageKey, linkUrl, sortOrder, isVisible]
+    [title, description, JSON.stringify(tags), imageKey, linkUrl, finalSortOrder, isVisible]
   );
 }
 
@@ -311,4 +317,30 @@ export async function deleteProject(input: { id: unknown }) {
 
   const pool = getDbPool();
   await pool.query('DELETE FROM projects WHERE id = $1', [id]);
+}
+
+export async function reorderProjects(input: { orderedIds: unknown }) {
+  if (!isDbConfigured()) throw new Error('Database is not configured');
+  await ensureProjectsTable();
+
+  if (!Array.isArray(input.orderedIds)) throw new Error('Invalid ordered ids');
+  const orderedIds = input.orderedIds.map((v) => Number(v)).filter((v) => Number.isFinite(v));
+  if (orderedIds.length === 0) throw new Error('Invalid ordered ids');
+  if (orderedIds.some((id) => id <= 0)) throw new Error('Invalid ordered ids');
+  const unique = new Set(orderedIds);
+  if (unique.size !== orderedIds.length) throw new Error('Invalid ordered ids');
+
+  const pool = getDbPool();
+  await pool.query('BEGIN');
+  try {
+    for (let i = 0; i < orderedIds.length; i++) {
+      const id = orderedIds[i]!;
+      const sortOrder = i + 1;
+      await pool.query('UPDATE projects SET sort_order = $2, updated_at = NOW() WHERE id = $1', [id, sortOrder]);
+    }
+    await pool.query('COMMIT');
+  } catch (e) {
+    await pool.query('ROLLBACK');
+    throw e;
+  }
 }
