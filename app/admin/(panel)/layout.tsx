@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic';
 
 const NAV_ITEMS = [
   { href: '/admin/menu', label: 'Menu' },
+  { href: '/admin/about', label: 'About' },
   { href: '/admin/projects', label: 'Projects' },
   { href: '/admin/skills', label: 'Skills' },
   { href: '/admin/experiences', label: 'Experiences' },
@@ -73,4 +74,3 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     </div>
   );
 }
-

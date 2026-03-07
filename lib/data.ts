@@ -65,7 +65,6 @@ export const experiencesData = [
       "Pinia",
       "PrimeVue",
       "Service Workers",
-      "Angular"
     ],
     icon: "pi pi-briefcase",
   },

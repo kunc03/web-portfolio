@@ -10,7 +10,7 @@ export type SkillItem = {
 
 const DEFAULT_SKILLS: Array<Pick<SkillItem, 'name' | 'sortOrder' | 'isVisible'>> = skillsData.map((name, idx) => ({
   name,
-  sortOrder: (idx + 1) * 10,
+  sortOrder: idx + 1,
   isVisible: true,
 }));
 
@@ -99,16 +99,22 @@ export async function getSkills(input?: { includeHidden?: boolean }) {
   }
 }
 
-export async function createSkill(input: { name: unknown; sortOrder: unknown; isVisible: unknown }) {
+export async function createSkill(input: { name: unknown; sortOrder?: unknown; isVisible?: unknown }) {
   if (!isDbConfigured()) throw new Error('Database is not configured');
   await ensureSkillsTable();
 
   const name = normalizeName(input.name);
-  const sortOrder = normalizeSortOrder(input.sortOrder);
-  const isVisible = normalizeIsVisible(input.isVisible);
+  const sortOrder =
+    input.sortOrder === undefined || input.sortOrder === null || String(input.sortOrder).trim() === ''
+      ? null
+      : normalizeSortOrder(input.sortOrder);
+  const isVisible = normalizeIsVisible(input.isVisible ?? true);
 
   const pool = getDbPool();
-  await pool.query('INSERT INTO skills (name, sort_order, is_visible) VALUES ($1, $2, $3)', [name, sortOrder, isVisible]);
+  const finalSortOrder =
+    sortOrder ??
+    Number((await pool.query<{ next_sort_order: number }>('SELECT COALESCE(MAX(sort_order), 0) + 1 AS next_sort_order FROM skills;')).rows[0]?.next_sort_order ?? 1);
+  await pool.query('INSERT INTO skills (name, sort_order, is_visible, updated_at) VALUES ($1, $2, $3, NOW())', [name, finalSortOrder, isVisible]);
 }
 
 export async function updateSkill(input: { id: unknown; name: unknown; sortOrder: unknown; isVisible: unknown }) {
@@ -142,4 +148,30 @@ export async function deleteSkill(input: { id: unknown }) {
 
   const pool = getDbPool();
   await pool.query('DELETE FROM skills WHERE id = $1', [id]);
+}
+
+export async function reorderSkills(input: { orderedIds: unknown }) {
+  if (!isDbConfigured()) throw new Error('Database is not configured');
+  await ensureSkillsTable();
+
+  if (!Array.isArray(input.orderedIds)) throw new Error('Invalid ordered ids');
+  const orderedIds = input.orderedIds.map((v) => Number(v)).filter((v) => Number.isFinite(v));
+  if (orderedIds.length === 0) throw new Error('Invalid ordered ids');
+  if (orderedIds.some((id) => id <= 0)) throw new Error('Invalid ordered ids');
+  const unique = new Set(orderedIds);
+  if (unique.size !== orderedIds.length) throw new Error('Invalid ordered ids');
+
+  const pool = getDbPool();
+  await pool.query('BEGIN');
+  try {
+    for (let i = 0; i < orderedIds.length; i++) {
+      const id = orderedIds[i]!;
+      const sortOrder = i + 1;
+      await pool.query('UPDATE skills SET sort_order = $2, updated_at = NOW() WHERE id = $1', [id, sortOrder]);
+    }
+    await pool.query('COMMIT');
+  } catch (e) {
+    await pool.query('ROLLBACK');
+    throw e;
+  }
 }

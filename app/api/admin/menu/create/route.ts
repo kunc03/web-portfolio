@@ -27,7 +27,6 @@ export async function POST(req: NextRequest) {
   await createMenuItem({
     name: formData.get('name'),
     href: formData.get('href'),
-    sortOrder: formData.get('sortOrder'),
     isVisible: formData.get('isVisible'),
   });
 

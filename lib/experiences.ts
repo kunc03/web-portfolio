@@ -237,3 +237,29 @@ export async function deleteExperience(input: { id: unknown }) {
   const pool = getDbPool();
   await pool.query('DELETE FROM experiences WHERE id = $1', [id]);
 }
+
+export async function reorderExperiences(input: { orderedIds: unknown }) {
+  if (!isDbConfigured()) throw new Error('Database is not configured');
+  await ensureExperiencesTable();
+
+  if (!Array.isArray(input.orderedIds)) throw new Error('Invalid ordered ids');
+  const orderedIds = input.orderedIds.map((v) => Number(v)).filter((v) => Number.isFinite(v));
+  if (orderedIds.length === 0) throw new Error('Invalid ordered ids');
+  if (orderedIds.some((id) => id <= 0)) throw new Error('Invalid ordered ids');
+  const unique = new Set(orderedIds);
+  if (unique.size !== orderedIds.length) throw new Error('Invalid ordered ids');
+
+  const pool = getDbPool();
+  await pool.query('BEGIN');
+  try {
+    for (let i = 0; i < orderedIds.length; i++) {
+      const id = orderedIds[i]!;
+      const sortOrder = i + 1;
+      await pool.query('UPDATE experiences SET sort_order = $2, updated_at = NOW() WHERE id = $1', [id, sortOrder]);
+    }
+    await pool.query('COMMIT');
+  } catch (e) {
+    await pool.query('ROLLBACK');
+    throw e;
+  }
+}

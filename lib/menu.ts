@@ -9,12 +9,12 @@ export type MenuItem = {
 };
 
 const DEFAULT_MENU: Array<Pick<MenuItem, 'name' | 'href' | 'sortOrder' | 'isVisible'>> = [
-  { name: 'Home', href: '#home', sortOrder: 10, isVisible: true },
-  { name: 'About', href: '#about', sortOrder: 20, isVisible: true },
-  { name: 'Projects', href: '#projects', sortOrder: 30, isVisible: true },
-  { name: 'Skills', href: '#skills', sortOrder: 40, isVisible: true },
-  { name: 'Experiences', href: '#experiences', sortOrder: 50, isVisible: true },
-  { name: 'Contact', href: '#contact', sortOrder: 60, isVisible: true },
+  { name: 'Home', href: '#home', sortOrder: 1, isVisible: true },
+  { name: 'About', href: '#about', sortOrder: 2, isVisible: true },
+  { name: 'Projects', href: '#projects', sortOrder: 3, isVisible: true },
+  { name: 'Skills', href: '#skills', sortOrder: 4, isVisible: true },
+  { name: 'Experiences', href: '#experiences', sortOrder: 5, isVisible: true },
+  { name: 'Contact', href: '#contact', sortOrder: 6, isVisible: true },
 ];
 
 async function ensureMenuTable() {
@@ -136,17 +136,24 @@ export async function createMenuItem(input: { name: unknown; href: unknown; sort
 
   const name = normalizeName(input.name);
   const href = normalizeHref(input.href);
-  const sortOrder = normalizeSortOrder(input.sortOrder ?? 0);
+  const sortOrder =
+    input.sortOrder === undefined || input.sortOrder === null || String(input.sortOrder).trim() === ''
+      ? null
+      : normalizeSortOrder(input.sortOrder);
   const isVisible = normalizeIsVisible(input.isVisible ?? true);
 
   const pool = getDbPool();
+  const finalSortOrder =
+    sortOrder ??
+    Number((await pool.query<{ next_sort_order: number }>('SELECT COALESCE(MAX(sort_order), 0) + 1 AS next_sort_order FROM menu_items;')).rows[0]
+      ?.next_sort_order ?? 1);
   const { rows } = await pool.query<{ id: number }>(
     `
       INSERT INTO menu_items (name, href, sort_order, is_visible, updated_at)
       VALUES ($1, $2, $3, $4, NOW())
       RETURNING id
     `,
-    [name, href, sortOrder, isVisible]
+    [name, href, finalSortOrder, isVisible]
   );
 
   return rows[0]?.id ?? null;
@@ -184,4 +191,30 @@ export async function deleteMenuItem(input: { id: unknown }) {
 
   const pool = getDbPool();
   await pool.query('DELETE FROM menu_items WHERE id = $1', [id]);
+}
+
+export async function reorderMenuItems(input: { orderedIds: unknown }) {
+  if (!isDbConfigured()) throw new Error('Database is not configured');
+  await ensureMenuTable();
+
+  if (!Array.isArray(input.orderedIds)) throw new Error('Invalid ordered ids');
+  const orderedIds = input.orderedIds.map((v) => Number(v)).filter((v) => Number.isFinite(v));
+  if (orderedIds.length === 0) throw new Error('Invalid ordered ids');
+  if (orderedIds.some((id) => id <= 0)) throw new Error('Invalid ordered ids');
+  const unique = new Set(orderedIds);
+  if (unique.size !== orderedIds.length) throw new Error('Invalid ordered ids');
+
+  const pool = getDbPool();
+  await pool.query('BEGIN');
+  try {
+    for (let i = 0; i < orderedIds.length; i++) {
+      const id = orderedIds[i]!;
+      const sortOrder = i + 1;
+      await pool.query('UPDATE menu_items SET sort_order = $2, updated_at = NOW() WHERE id = $1', [id, sortOrder]);
+    }
+    await pool.query('COMMIT');
+  } catch (e) {
+    await pool.query('ROLLBACK');
+    throw e;
+  }
 }
