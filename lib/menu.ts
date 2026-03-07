@@ -98,32 +98,36 @@ export async function getMenuItems(options?: { includeHidden?: boolean }) {
     return getDefaultMenu().filter((m) => includeHidden || m.isVisible).sort((a, b) => a.sortOrder - b.sortOrder);
   }
 
-  await ensureMenuTable();
-  await seedMenuIfEmpty();
+  try {
+    await ensureMenuTable();
+    await seedMenuIfEmpty();
 
-  const pool = getDbPool();
-  const { rows } = await pool.query<{
-    id: number;
-    name: string;
-    href: string;
-    sort_order: number;
-    is_visible: boolean;
-  }>(
-    `
-      SELECT id, name, href, sort_order, is_visible
-      FROM menu_items
-      ${includeHidden ? '' : 'WHERE is_visible = TRUE'}
-      ORDER BY sort_order ASC, id ASC
-    `
-  );
+    const pool = getDbPool();
+    const { rows } = await pool.query<{
+      id: number;
+      name: string;
+      href: string;
+      sort_order: number;
+      is_visible: boolean;
+    }>(
+      `
+        SELECT id, name, href, sort_order, is_visible
+        FROM menu_items
+        ${includeHidden ? '' : 'WHERE is_visible = TRUE'}
+        ORDER BY sort_order ASC, id ASC
+      `
+    );
 
-  return rows.map((r) => ({
-    id: r.id,
-    name: r.name,
-    href: r.href,
-    sortOrder: r.sort_order,
-    isVisible: r.is_visible,
-  })) satisfies MenuItem[];
+    return rows.map((r) => ({
+      id: r.id,
+      name: r.name,
+      href: r.href,
+      sortOrder: r.sort_order,
+      isVisible: r.is_visible,
+    })) satisfies MenuItem[];
+  } catch {
+    return getDefaultMenu().filter((m) => includeHidden || m.isVisible).sort((a, b) => a.sortOrder - b.sortOrder);
+  }
 }
 
 export async function createMenuItem(input: { name: unknown; href: unknown; sortOrder?: unknown; isVisible?: unknown }) {
