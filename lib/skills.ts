@@ -69,30 +69,34 @@ export async function getSkills(input?: { includeHidden?: boolean }) {
     return DEFAULT_SKILLS.map((s, idx) => ({ id: -(idx + 1), ...s })).filter((s) => includeHidden || s.isVisible);
   }
 
-  await ensureSkillsTable();
-  await seedSkillsIfEmpty();
+  try {
+    await ensureSkillsTable();
+    await seedSkillsIfEmpty();
 
-  const pool = getDbPool();
-  const { rows } = await pool.query<{
-    id: number;
-    name: string;
-    sort_order: number;
-    is_visible: boolean;
-  }>(
-    `
-      SELECT id, name, sort_order, is_visible
-      FROM skills
-      ${includeHidden ? '' : 'WHERE is_visible = TRUE'}
-      ORDER BY sort_order ASC, id ASC
-    `
-  );
+    const pool = getDbPool();
+    const { rows } = await pool.query<{
+      id: number;
+      name: string;
+      sort_order: number;
+      is_visible: boolean;
+    }>(
+      `
+        SELECT id, name, sort_order, is_visible
+        FROM skills
+        ${includeHidden ? '' : 'WHERE is_visible = TRUE'}
+        ORDER BY sort_order ASC, id ASC
+      `
+    );
 
-  return rows.map((r) => ({
-    id: r.id,
-    name: r.name,
-    sortOrder: r.sort_order,
-    isVisible: r.is_visible,
-  }));
+    return rows.map((r) => ({
+      id: r.id,
+      name: r.name,
+      sortOrder: r.sort_order,
+      isVisible: r.is_visible,
+    }));
+  } catch {
+    return DEFAULT_SKILLS.map((s, idx) => ({ id: -(idx + 1), ...s })).filter((s) => includeHidden || s.isVisible);
+  }
 }
 
 export async function createSkill(input: { name: unknown; sortOrder: unknown; isVisible: unknown }) {

@@ -110,42 +110,46 @@ export async function getExperiences(input?: { includeHidden?: boolean }) {
     return DEFAULT_EXPERIENCES.map((e, idx) => ({ id: -(idx + 1), ...e })).filter((e) => includeHidden || e.isVisible);
   }
 
-  await ensureExperiencesTable();
-  await seedExperiencesIfEmpty();
+  try {
+    await ensureExperiencesTable();
+    await seedExperiencesIfEmpty();
 
-  const pool = getDbPool();
-  const { rows } = await pool.query<{
-    id: number;
-    date: string;
-    title: string;
-    company: string;
-    location: string;
-    description: string;
-    tech_stack: unknown;
-    icon: string;
-    sort_order: number;
-    is_visible: boolean;
-  }>(
-    `
-      SELECT id, date, title, company, location, description, tech_stack, icon, sort_order, is_visible
-      FROM experiences
-      ${includeHidden ? '' : 'WHERE is_visible = TRUE'}
-      ORDER BY sort_order ASC, id ASC
-    `
-  );
+    const pool = getDbPool();
+    const { rows } = await pool.query<{
+      id: number;
+      date: string;
+      title: string;
+      company: string;
+      location: string;
+      description: string;
+      tech_stack: unknown;
+      icon: string;
+      sort_order: number;
+      is_visible: boolean;
+    }>(
+      `
+        SELECT id, date, title, company, location, description, tech_stack, icon, sort_order, is_visible
+        FROM experiences
+        ${includeHidden ? '' : 'WHERE is_visible = TRUE'}
+        ORDER BY sort_order ASC, id ASC
+      `
+    );
 
-  return rows.map((r) => ({
-    id: r.id,
-    date: r.date,
-    title: r.title,
-    company: r.company,
-    location: r.location,
-    description: r.description,
-    techStack: Array.isArray(r.tech_stack) ? (r.tech_stack as unknown[]).map((v) => String(v)) : [],
-    icon: r.icon,
-    sortOrder: r.sort_order,
-    isVisible: r.is_visible,
-  }));
+    return rows.map((r) => ({
+      id: r.id,
+      date: r.date,
+      title: r.title,
+      company: r.company,
+      location: r.location,
+      description: r.description,
+      techStack: Array.isArray(r.tech_stack) ? (r.tech_stack as unknown[]).map((v) => String(v)) : [],
+      icon: r.icon,
+      sortOrder: r.sort_order,
+      isVisible: r.is_visible,
+    }));
+  } catch {
+    return DEFAULT_EXPERIENCES.map((e, idx) => ({ id: -(idx + 1), ...e })).filter((e) => includeHidden || e.isVisible);
+  }
 }
 
 export async function createExperience(input: {
@@ -233,4 +237,3 @@ export async function deleteExperience(input: { id: unknown }) {
   const pool = getDbPool();
   await pool.query('DELETE FROM experiences WHERE id = $1', [id]);
 }
-

@@ -196,39 +196,43 @@ export async function getProjects(input?: { includeHidden?: boolean }) {
     return DEFAULT_PROJECTS.map((p, idx) => ({ id: -(idx + 1), ...p, imageUrl: resolveProjectImage(p.imageKey) })).filter((p) => includeHidden || p.isVisible);
   }
 
-  await ensureProjectsTable();
-  await seedProjectsIfEmpty();
+  try {
+    await ensureProjectsTable();
+    await seedProjectsIfEmpty();
 
-  const pool = getDbPool();
-  const { rows } = await pool.query<{
-    id: number;
-    title: string;
-    description: string;
-    tags: unknown;
-    image_key: string;
-    link_url: string;
-    sort_order: number;
-    is_visible: boolean;
-  }>(
-    `
-      SELECT id, title, description, tags, image_key, link_url, sort_order, is_visible
-      FROM projects
-      ${includeHidden ? '' : 'WHERE is_visible = TRUE'}
-      ORDER BY sort_order ASC, id ASC
-    `
-  );
+    const pool = getDbPool();
+    const { rows } = await pool.query<{
+      id: number;
+      title: string;
+      description: string;
+      tags: unknown;
+      image_key: string;
+      link_url: string;
+      sort_order: number;
+      is_visible: boolean;
+    }>(
+      `
+        SELECT id, title, description, tags, image_key, link_url, sort_order, is_visible
+        FROM projects
+        ${includeHidden ? '' : 'WHERE is_visible = TRUE'}
+        ORDER BY sort_order ASC, id ASC
+      `
+    );
 
-  return rows.map((r) => ({
-    id: r.id,
-    title: r.title,
-    description: r.description,
-    tags: Array.isArray(r.tags) ? (r.tags as unknown[]).map((v) => String(v)) : [],
-    imageKey: r.image_key,
-    imageUrl: resolveProjectImage(r.image_key),
-    linkUrl: r.link_url,
-    sortOrder: r.sort_order,
-    isVisible: r.is_visible,
-  }));
+    return rows.map((r) => ({
+      id: r.id,
+      title: r.title,
+      description: r.description,
+      tags: Array.isArray(r.tags) ? (r.tags as unknown[]).map((v) => String(v)) : [],
+      imageKey: r.image_key,
+      imageUrl: resolveProjectImage(r.image_key),
+      linkUrl: r.link_url,
+      sortOrder: r.sort_order,
+      isVisible: r.is_visible,
+    }));
+  } catch {
+    return DEFAULT_PROJECTS.map((p, idx) => ({ id: -(idx + 1), ...p, imageUrl: resolveProjectImage(p.imageKey) })).filter((p) => includeHidden || p.isVisible);
+  }
 }
 
 export async function createProject(input: {
@@ -308,4 +312,3 @@ export async function deleteProject(input: { id: unknown }) {
   const pool = getDbPool();
   await pool.query('DELETE FROM projects WHERE id = $1', [id]);
 }
-
