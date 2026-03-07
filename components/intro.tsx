@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useEffect } from 'react';
+import React from 'react';
 import profile from '@/public/Bisa2.png';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -12,7 +12,7 @@ import { useSectionInView } from '@/lib/hooks';
 import { useActiveSectionContext } from '@/context/active-section';
 
 export default function Intro() {
-  const { ref } = useSectionInView('Home', 0.5);
+  const { ref } = useSectionInView('#home', 0.5);
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
   return (
@@ -31,7 +31,7 @@ export default function Intro() {
           href="#contact"
           className="group bg-gray-900 text-white px-[4vw] sm:px-7 py-[1.714vw] sm:py-3 flex items-center gap-[1.143vw] sm:gap-2 rounded-full outline-none focus:scale-110 hover:scale-105 hover:bg-gray-950 active:scale-105 transition"
           onClick={() => {
-            setActiveSection('Contact');
+            setActiveSection('#contact');
             setTimeOfLastClick(Date.now());
           }}
         >

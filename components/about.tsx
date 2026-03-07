@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import SectionHeading from "./section-heading";
 import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
 
 export default function About() {
-  const { ref } = useSectionInView("About");
+  const { ref } = useSectionInView("#about");
 
   return (
     <motion.section
@@ -61,7 +61,4 @@ export default function About() {
       </p>
     </motion.section>
   );
-}
-function setActiveSection(arg0: string) {
-  throw new Error("Function not implemented.");
 }

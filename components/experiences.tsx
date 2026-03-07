@@ -4,25 +4,10 @@ import { useSectionInView } from "@/lib/hooks";
 import SectionHeading from "./section-heading";
 import { Timeline } from "primereact/timeline";
 import { Tag } from "primereact/tag";
-import { experiencesData } from "@/lib/data";
+import type { ExperienceItem } from "@/lib/experiences";
 
-const Experiences = () => {
-  const { ref } = useSectionInView("Experiences");
-  const customizedContent = (item: any) => (
-    <div className="p-4">
-      <h3 className="text-lg font-semibold">{item.role}</h3>
-      <p className="text-sm text-gray-500">
-        {item.company} · {item.date}
-      </p>
-      <p className="text-sm text-gray-400">{item.location}</p>
-      <p className="mt-2 text-sm text-gray-700">{item.description}</p>
-      <div className="mt-3 flex flex-wrap gap-2">
-        {item.techStack.map((tech: string, index: number) => (
-          <Tag key={index} value={tech} severity="info" className="text-xs" />
-        ))}
-      </div>
-    </div>
-  );
+const Experiences = ({ experiences }: { experiences: ExperienceItem[] }) => {
+  const { ref } = useSectionInView("#experiences");
 
   return (
     <section
@@ -33,7 +18,7 @@ const Experiences = () => {
       <SectionHeading>My Experiences</SectionHeading>
 
       <Timeline
-        value={[...experiencesData]}
+        value={experiences}
         align="alternate"
         className="pl-[1.143vw] sm:pl-2"
         opposite={(item) => (

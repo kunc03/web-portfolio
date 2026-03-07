@@ -16,7 +16,7 @@ type ActiveSectionContextType = {
 
 export const ActiveSectionContext = createContext<ActiveSectionContextType | null>(null);
 export default function ActiveSectionContextProvider({ children }: ActiveSectionContextProviderProps) {
-  const [activeSection, setActiveSection] = useState<SectionName>('Home');
+  const [activeSection, setActiveSection] = useState<SectionName>('#home');
   const [timeOfLastClick, setTimeOfLastClick] = useState(0); //we need to keep track of this to disable the observed temporarily when user click on a link
 
   return <ActiveSectionContext.Provider value={{ activeSection, setActiveSection, timeOfLastClick, setTimeOfLastClick }}>{children}</ActiveSectionContext.Provider>;

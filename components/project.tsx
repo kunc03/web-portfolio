@@ -5,9 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useRef } from "react";
-import { projectsData } from "@/lib/data";
+import type { StaticImageData } from "next/image";
 
-type ProjectProps = (typeof projectsData)[number];
+export type ProjectProps = {
+  title: string;
+  description: string;
+  tags: string[];
+  imageUrl: StaticImageData;
+  linkUrl: string;
+};
 export default function Project({
   title,
   description,
