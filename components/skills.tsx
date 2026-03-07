@@ -2,7 +2,6 @@
 
 import React from 'react';
 import SectionHeading from './section-heading';
-import { skillsData } from '@/lib/data';
 import { useSectionInView } from '@/lib/hooks';
 import { motion } from 'framer-motion';
 
@@ -20,15 +19,15 @@ const fadeInAnimationsVariants = {
   }),
 };
 
-export default function Skills() {
-  const { ref } = useSectionInView('Skills');
+export default function Skills({ skills }: { skills: string[] }) {
+  const { ref } = useSectionInView('#skills');
 
   return (
     <section ref={ref} id="skills" className="mb-28 max-w-[53rem] scroll-mt-28 text-center pb-20">
       <SectionHeading>My skills</SectionHeading>
 
       <ul className="flex flex-wrap justify-center gap-2 text-[2.571vw] sm:text-lg text-gray-800 mt-10">
-        {skillsData.map((skill, index) => (
+        {skills.map((skill, index) => (
           <motion.li
             key={index}
             className="bg-white border border-black/[0.1] rounded-xl px-[2.857vw] sm:px-5 py-[1.714vw] sm:py-3 dark:bg-white/10 dark:text-white/80"

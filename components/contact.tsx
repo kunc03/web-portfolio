@@ -9,7 +9,7 @@ import SubmitBtn from './submit-btn';
 import toast from 'react-hot-toast';
 
 export default function Contact() {
-  const { ref } = useSectionInView('Contact');
+  const { ref } = useSectionInView('#contact');
   const [senderEmail, setSenderEmail] = useState('');
   const [message, setMessage] = useState('');
 
