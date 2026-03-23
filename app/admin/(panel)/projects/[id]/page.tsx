@@ -6,7 +6,8 @@ import { redirect } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
-export default async function AdminProjectDetailPage({ params }: { params: { id: string } }) {
+export default async function AdminProjectDetailPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const dbReady = isDbConfigured();
   const id = Number(params.id);
   if (!Number.isFinite(id) || id <= 0) redirect('/admin/projects');

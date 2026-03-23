@@ -80,9 +80,9 @@ export function verifyAdminSessionToken(token: string | undefined | null) {
   return payload;
 }
 
-export function setAdminSessionCookie(email: string) {
+export async function setAdminSessionCookie(email: string) {
   const token = createAdminSessionToken(email);
-  cookies().set({
+  (await cookies() as any).set({
     name: ADMIN_SESSION_COOKIE,
     value: token,
     httpOnly: true,
@@ -93,8 +93,8 @@ export function setAdminSessionCookie(email: string) {
   });
 }
 
-export function clearAdminSessionCookie() {
-  cookies().set({
+export async function clearAdminSessionCookie() {
+  (await cookies() as any).set({
     name: ADMIN_SESSION_COOKIE,
     value: '',
     httpOnly: true,
@@ -105,13 +105,13 @@ export function clearAdminSessionCookie() {
   });
 }
 
-export function getAdminSession() {
-  const token = cookies().get(ADMIN_SESSION_COOKIE)?.value;
+export async function getAdminSession() {
+  const token = (await cookies()).get(ADMIN_SESSION_COOKIE)?.value;
   return verifyAdminSessionToken(token);
 }
 
-export function requireAdminSession() {
-  const session = getAdminSession();
+export async function requireAdminSession() {
+  const session = await getAdminSession();
   if (!session) {
     throw new Error('Unauthorized');
   }

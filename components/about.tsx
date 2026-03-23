@@ -9,7 +9,7 @@ export default function About({ paragraphs = [] }: { paragraphs?: string[] }) {
 
   return (
     <motion.section
-      className="pb-20 sm:pb-0 max-w-[45rem] h-auto sm:h-screen text-center leading-4 sm:leading-8 scroll-mt-28 sm:text-[16px] text-[2.286vw]"
+      className="pb-20 sm:pb-0 max-w-[45rem] h-auto sm:h-screen text-center leading-4 sm:leading-8 scroll-mt-28 sm:text-[16px] text-[2.286vw] relative"
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.175 }}

@@ -14,7 +14,7 @@ const NAV_ITEMS = [
 ] as const;
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const session = getAdminSession();
+  const session = await getAdminSession();
   if (!session) redirect('/admin/login');
 
   const dbReady = isDbConfigured();

@@ -4,6 +4,6 @@ import { NextRequest, NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
-  clearAdminSessionCookie();
+  await clearAdminSessionCookie();
   return NextResponse.redirect(new URL('/admin/login', req.url), 303);
 }
