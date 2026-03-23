@@ -20,6 +20,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.redirect(new URL('/admin/login?error=1', req.url), 303);
   }
 
-  setAdminSessionCookie(email);
+  await setAdminSessionCookie(email);
   return NextResponse.redirect(new URL('/admin/menu', req.url), 303);
 }

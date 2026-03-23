@@ -20,7 +20,7 @@ function getReturnUrl(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const session = getAdminSession();
+  const session = await getAdminSession();
   if (!session) return NextResponse.redirect(new URL('/admin/login', req.url), 303);
   if (!isDbConfigured()) return NextResponse.redirect(getReturnUrl(req), 303);
 

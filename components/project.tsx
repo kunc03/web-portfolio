@@ -40,18 +40,18 @@ export default function Project({
           <Link
             href={linkUrl}
             target="_blank"
-            className="text-[3.429vw] sm:text-2xl font-semibold"
+            className="text-xl sm:text-2xl font-semibold"
           >
             {title}
           </Link>
-          <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70 sm:text-[16px] text-[2.286vw]">
+          <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70 text-sm sm:text-[16px]">
             {description}
           </p>
-          <ul className="flex flex-wrap sm:mt-4 mt-[2.286vw] gap-[1.143vw] sm:gap-2">
+          <ul className="flex flex-wrap mt-2 sm:mt-4 gap-2">
             {tags.map((tag, index) => (
               <li
                 key={index}
-                className="bg-black/[0.7] px-3 py-1 text-[1.571vw] sm:text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70"
+                className="bg-black/[0.7] px-3 py-1 text-xs sm:text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70"
               >
                 {tag}
               </li>

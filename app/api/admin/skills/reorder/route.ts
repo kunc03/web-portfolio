@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
-  const session = getAdminSession();
+  const session = await getAdminSession();
   if (!session) return NextResponse.json({ ok: false, error: 'unauthorized' }, { status: 401 });
   if (!isDbConfigured()) return NextResponse.json({ ok: false, error: 'db_not_configured' }, { status: 400 });
 

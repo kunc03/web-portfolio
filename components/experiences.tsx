@@ -13,9 +13,9 @@ const Experiences = ({ experiences }: { experiences: ExperienceItem[] }) => {
     <section
       ref={ref}
       id="experiences"
-      className="mb-28 max-w-[121.143vw] sm:max-w-[53rem] scroll-mt-28 text-center pb-20"
+      className="mb-28 max-w-[121.143vw] sm:max-w-[53rem] scroll-mt-28 text-center pb-20 relative"
     >
-      <SectionHeading>My Experiences</SectionHeading>
+      <SectionHeading>My Timeline</SectionHeading>
 
       <Timeline
         value={experiences}
