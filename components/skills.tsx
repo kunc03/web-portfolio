@@ -30,12 +30,13 @@ export default function Skills({ skills }: { skills: string[] }) {
         {skills.map((skill, index) => (
           <motion.li
             key={index}
-            className="bg-white border border-black/[0.1] rounded-xl px-3 py-1.5 sm:px-5 sm:py-3 dark:bg-white/10 dark:text-white/80"
+            className="bg-white border border-black/[0.05] rounded-xl px-3 py-1.5 sm:px-5 sm:py-3 dark:bg-white/5 dark:border-white/10 dark:text-white/80 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)] hover:border-purple-500/50 hover:text-purple-600 dark:hover:text-purple-300 transition-all cursor-default"
             variants={fadeInAnimationsVariants}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             custom={index}
+            whileHover={{ scale: 1.1, y: -3 }}
           >
             {skill}
           </motion.li>

@@ -36,7 +36,7 @@ export default function Projects({ projects }: { projects: Array<ProjectProps & 
     >
       <SectionHeading>My projects</SectionHeading>
 
-      <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[60rem] mx-auto">
         <AnimatePresence initial={false}>
           {visible.map((project) => (
             <motion.div

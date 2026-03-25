@@ -33,43 +33,45 @@ export default function Project({
     <motion.div
       ref={ref}
       style={{ scale: scaleProgress, opacity: opacityProgress }}
-      className="group mb-3 sm:mb-8 last:mb-0"
+      className="group h-full"
     >
-      <section className=" bg-gray-100 max-w-[42rem] border-black/5 overflow-hidden sm:pr-0 relative sm:h-[20rem] even:pl-8 rounded-lg hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
-        <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[50%] flex flex-col h-full sm:group-even:ml-[18rem]">
+      <motion.section 
+        className="glass flex flex-col h-full border-black/5 overflow-hidden relative rounded-2xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.3)] dark:text-white dark:hover:border-purple-500/30"
+        whileHover={{ scale: 1.02 }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div className="relative h-48 sm:h-64 w-full overflow-hidden">
+          <Image
+            src={imageUrl}
+            alt={title}
+            quality={95}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+        </div>
+        <div className="p-6 flex flex-col flex-grow relative z-10">
           <Link
             href={linkUrl}
             target="_blank"
-            className="text-xl sm:text-2xl font-semibold"
+            className="text-xl sm:text-2xl font-semibold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 transition-all"
           >
             {title}
           </Link>
-          <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70 text-sm sm:text-[16px]">
+          <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70 text-sm flex-grow">
             {description}
           </p>
-          <ul className="flex flex-wrap mt-2 sm:mt-4 gap-2">
+          <ul className="flex flex-wrap mt-4 gap-2">
             {tags.map((tag, index) => (
               <li
                 key={index}
-                className="bg-black/[0.7] px-3 py-1 text-xs sm:text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70"
+                className="bg-purple-100/80 text-purple-800 dark:bg-purple-900/30 dark:text-purple-200 border border-purple-200 dark:border-purple-800/50 px-3 py-1 text-[0.7rem] uppercase tracking-wider rounded-full"
               >
                 {tag}
               </li>
             ))}
           </ul>
         </div>
-
-        <Image
-          src={imageUrl}
-          alt={title}
-          quality={95}
-          className="absolute hidden sm:block top-8 -right-40 w-[28.25rem] rounded-t-lg shadow-2xl transition group-hover:scale-[1.04]group-hover:-translate-x-3 group-hover:translate-y-3 group-hover:-rotate-2 
-        
-        group-even:group-hover:translate-x-3 group-even:group-hover:translate-y-3 group-even:group-hover:rotate-2
-
-        group-even:right-[initial] group-even:-left-40"
-        />
-      </section>
+      </motion.section>
     </motion.div>
   );
 }

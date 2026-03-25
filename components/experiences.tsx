@@ -25,8 +25,10 @@ const Experiences = ({ experiences }: { experiences: ExperienceItem[] }) => {
           <div className="text-[2vw] sm:text-sm text-gray-500 min-w-[14.286vw] sm:min-w-[100px]">{item.date}</div>
         )}
         content={(item) => (
-          <div className="p-[2.286vw] text-start sm:p-4 rounded-2xl shadow-black/10 dark:shadow-white/10 shadow-lg border border-gray-200 border-black/[0.1] dark:bg-white/10 bg-white mb-[1.714vw] sm:mb-3">
-            <h3 className="text-[2.571vw] sm:text-lg font-semibold text-gray-700 dark:text-white/70">
+          <div className="p-[2.286vw] text-start sm:p-4 rounded-2xl shadow-lg border border-black/10 dark:border-white/10 bg-white dark:bg-white/10 mb-[1.714vw] sm:mb-3 transition-all duration-300 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:border-purple-500/50 group relative overflow-hidden backdrop-blur-sm">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="relative z-10">
+            <h3 className="text-[2.571vw] sm:text-lg font-semibold text-gray-700 dark:text-white/90 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
               {item.title}
             </h3>
             <p className="text-[2vw] sm:text-sm font-semibold text-gray-700 dark:text-white/70 mb-[0.571vw] sm:mb-1">
@@ -39,11 +41,12 @@ const Experiences = ({ experiences }: { experiences: ExperienceItem[] }) => {
               {(item.techStack as string[]).filter((tech: string, idx: number, arr: string[]) => arr.indexOf(tech) === idx).map((tech: string) => (
                 <span
                   key={tech}
-                  className="px-[1.143vw] py-[0.571vw] sm:px-2 sm:py-1 text-[1.714vw] sm:text-xs dark:bg-white/10 bg-white dark:bg-zinc-800 border border-gray-200 border-black/[0.1] text-gray-700 dark:text-white/70 rounded-full"
+                  className="px-[1.143vw] py-[0.571vw] sm:px-2 sm:py-1 text-[1.714vw] sm:text-xs bg-gray-50 dark:bg-white/5 border border-black/[0.1] dark:border-white/10 text-gray-700 dark:text-white/70 rounded-full group-hover:border-purple-500/30 transition-colors"
                 >
                   {tech}
                 </span>
               ))}
+            </div>
             </div>
           </div>
         )}

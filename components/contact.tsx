@@ -60,7 +60,7 @@ export default function Contact() {
       >
         <input
           name="senderEmail"
-          className="h-14 px-4 rounded-lg borderBlack dark:bg-white/10 dark:text-white/80 dark:opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
+          className="h-14 px-4 rounded-xl border border-black/10 shadow-sm bg-white dark:bg-white/5 dark:border-white/10 dark:text-white/90 focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all outline-none backdrop-blur-md"
           type="email"
           required
           maxLength={500}
@@ -69,7 +69,7 @@ export default function Contact() {
         />
         <textarea
           name="message"
-          className="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white/10 dark:text-white/80 dark:opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
+          className="h-52 my-3 rounded-xl border border-black/10 shadow-sm p-4 bg-white dark:bg-white/5 dark:border-white/10 dark:text-white/90 focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all outline-none backdrop-blur-md"
           required
           maxLength={5000}
           placeholder="Your message"
