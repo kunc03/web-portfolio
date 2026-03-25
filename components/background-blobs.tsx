@@ -8,7 +8,7 @@ export default function BackgroundBlobs() {
     <div className="absolute inset-x-0 top-0 bottom-0 overflow-hidden -z-10 select-none pointer-events-none" aria-hidden="true">
       {/* 1. Top Right - Pink */}
       <motion.div
-        className="bg-[#fbe2e3] absolute top-[5%] right-[-10%] h-[35rem] w-[35rem] rounded-full blur-[10rem] sm:w-[50rem] dark:bg-[#946263] opacity-60"
+        className="bg-[#fbe2e3] absolute top-[5%] right-[-10%] h-[35rem] w-[35rem] rounded-full blur-3xl sm:w-[50rem] dark:bg-[#946263] opacity-60"
         animate={{
           x: ['-15vw', '15vw', '-10vw', '10vw', '-15vw'],
           y: ['-5vh', '5vh', '-3vh', '3vh', '-5vh'],
@@ -19,7 +19,7 @@ export default function BackgroundBlobs() {
       
       {/* 2. Top Left - Purple */}
       <motion.div
-        className="bg-[#dbd5ff] absolute top-[15%] left-[-15%] h-[35rem] w-[35rem] rounded-full blur-[10rem] sm:w-[50rem] dark:bg-[#676394] opacity-60"
+        className="bg-[#dbd5ff] absolute top-[15%] left-[-15%] h-[35rem] w-[35rem] rounded-full blur-3xl sm:w-[50rem] dark:bg-[#676394] opacity-60"
         animate={{
           x: ['-10vw', '20vw', '-5vw', '10vw', '-10vw'],
           y: ['5vh', '-10vh', '5vh', '-3vh', '5vh'],
@@ -30,7 +30,7 @@ export default function BackgroundBlobs() {
 
       {/* 3. Mid Right - Amber */}
       <motion.div
-        className="bg-amber-100 absolute top-[30%] right-[-15%] h-[30rem] w-[30rem] rounded-full blur-[9rem] sm:w-[45rem] dark:bg-amber-900 opacity-40 dark:opacity-25"
+        className="bg-amber-100 absolute top-[30%] right-[-15%] h-[30rem] w-[30rem] rounded-full blur-3xl sm:w-[45rem] dark:bg-amber-900 opacity-40 dark:opacity-25"
         animate={{
           x: ['-20vw', '10vw', '-15vw', '5vw', '-20vw'],
           y: ['-8vh', '8vh', '-4vh', '4vh', '-8vh'],
@@ -41,7 +41,7 @@ export default function BackgroundBlobs() {
 
       {/* 4. Mid Left - Cyan */}
       <motion.div
-        className="bg-cyan-100 absolute top-[42%] left-[-15%] h-[30rem] w-[30rem] rounded-full blur-[9rem] sm:w-[45rem] dark:bg-cyan-900 opacity-40 dark:opacity-25"
+        className="bg-cyan-100 absolute top-[42%] left-[-15%] h-[30rem] w-[30rem] rounded-full blur-3xl sm:w-[45rem] dark:bg-cyan-900 opacity-40 dark:opacity-25"
         animate={{
           x: ['-5vw', '25vw', '-10vw', '15vw', '-5vw'],
           y: ['8vh', '-8vh', '4vh', '-4vh', '8vh'],
@@ -52,7 +52,7 @@ export default function BackgroundBlobs() {
 
       {/* 5. Mid Right - Teal */}
       <motion.div
-        className="bg-teal-100 absolute top-[55%] right-[-10%] h-[35rem] w-[35rem] rounded-full blur-[10rem] sm:w-[45rem] dark:bg-emerald-900 opacity-40 dark:opacity-25"
+        className="bg-teal-100 absolute top-[55%] right-[-10%] h-[35rem] w-[35rem] rounded-full blur-3xl sm:w-[45rem] dark:bg-emerald-900 opacity-40 dark:opacity-25"
         animate={{
           x: ['-15vw', '15vw', '-8vw', '8vw', '-15vw'],
           y: ['-10vh', '10vh', '-5vh', '5vh', '-10vh'],
@@ -63,7 +63,7 @@ export default function BackgroundBlobs() {
 
       {/* 6. Mid Left - Indigo */}
       <motion.div
-        className="bg-indigo-100 absolute top-[68%] left-[-10%] h-[30rem] w-[30rem] rounded-full blur-[9rem] sm:w-[40rem] dark:bg-indigo-950 opacity-40 dark:opacity-25"
+        className="bg-indigo-100 absolute top-[68%] left-[-10%] h-[30rem] w-[30rem] rounded-full blur-3xl sm:w-[40rem] dark:bg-indigo-950 opacity-40 dark:opacity-25"
         animate={{
           x: ['-12vw', '12vw', '-6vw', '6vw', '-12vw'],
           y: ['8vh', '-8vh', '4vh', '-4vh', '8vh'],
@@ -74,7 +74,7 @@ export default function BackgroundBlobs() {
 
       {/* 7. Bottom Right - Pink/Rose */}
       <motion.div
-        className="bg-rose-100 absolute top-[78%] right-[-15%] h-[30rem] w-[30rem] rounded-full blur-[9rem] sm:w-[45rem] dark:bg-rose-900 opacity-35 dark:opacity-20"
+        className="bg-rose-100 absolute top-[78%] right-[-15%] h-[30rem] w-[30rem] rounded-full blur-3xl sm:w-[45rem] dark:bg-rose-900 opacity-35 dark:opacity-20"
         animate={{
           x: ['-20vw', '10vw', '-12vw', '8vw', '-20vw'],
           y: ['-8vh', '8vh', '-4vh', '4vh', '-8vh'],
@@ -85,7 +85,7 @@ export default function BackgroundBlobs() {
 
       {/* 8. Bottom Left - Emerald */}
       <motion.div
-        className="bg-emerald-100 absolute top-[85%] left-[-15%] h-[30rem] w-[30rem] rounded-full blur-[9rem] sm:w-[40rem] dark:bg-teal-900 opacity-35 dark:opacity-20"
+        className="bg-emerald-100 absolute top-[85%] left-[-15%] h-[30rem] w-[30rem] rounded-full blur-3xl sm:w-[40rem] dark:bg-teal-900 opacity-35 dark:opacity-20"
         animate={{
           x: ['-8vw', '18vw', '-4vw', '10vw', '-8vw'],
           y: ['6vh', '-6vh', '3vh', '-3vh', '6vh'],
@@ -96,7 +96,7 @@ export default function BackgroundBlobs() {
 
       {/* 9. Bottom Right - Deep Blue */}
       <motion.div
-        className="bg-blue-100 absolute top-[92%] right-[-10%] h-[35rem] w-[35rem] rounded-full blur-[10rem] sm:w-[45rem] dark:bg-blue-950 opacity-40 dark:opacity-25"
+        className="bg-blue-100 absolute top-[92%] right-[-10%] h-[35rem] w-[35rem] rounded-full blur-3xl sm:w-[45rem] dark:bg-blue-950 opacity-40 dark:opacity-25"
         animate={{
           x: ['-15vw', '15vw', '-10vw', '10vw', '-15vw'],
           y: ['-5vh', '7vh', '-3vh', '3vh', '-5vh'],
@@ -107,7 +107,7 @@ export default function BackgroundBlobs() {
 
       {/* 10. Bottom Center-Left - Violet */}
       <motion.div
-        className="bg-[#dbd5ff] absolute top-[97%] left-[-10%] h-[30rem] w-[30rem] rounded-full blur-[9rem] sm:w-[40rem] dark:bg-[#676394] opacity-40 dark:opacity-25"
+        className="bg-[#dbd5ff] absolute top-[97%] left-[-10%] h-[30rem] w-[30rem] rounded-full blur-3xl sm:w-[40rem] dark:bg-[#676394] opacity-40 dark:opacity-25"
         animate={{
           x: ['-10vw', '20vw', '-5vw', '15vw', '-10vw'],
           y: ['7vh', '-7vh', '4vh', '-4vh', '7vh'],
@@ -115,8 +115,6 @@ export default function BackgroundBlobs() {
         }}
         transition={{ repeat: Infinity, duration: 32, ease: 'easeInOut' }}
       />
-      {/* SVG Noise Overlay */}
-      <div className="absolute inset-x-0 top-0 bottom-0 opacity-[0.04] dark:opacity-[0.02] pointer-events-none mix-blend-overlay z-0" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }}></div>
     </div>
   );
 }

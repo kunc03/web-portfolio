@@ -7,7 +7,7 @@ import { useSectionInView } from '@/lib/hooks';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { ProjectProps } from './project';
 
-const INITIAL_COUNT = 3;
+const INITIAL_COUNT = 4;
 
 export default function Projects({ projects }: { projects: Array<ProjectProps & { id: number }> }) {
   const { ref } = useSectionInView('#projects');
