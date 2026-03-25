@@ -3,7 +3,6 @@
 import { useSectionInView } from "@/lib/hooks";
 import SectionHeading from "./section-heading";
 import { Timeline } from "primereact/timeline";
-import { Tag } from "primereact/tag";
 import type { ExperienceItem } from "@/lib/experiences";
 
 const Experiences = ({ experiences }: { experiences: ExperienceItem[] }) => {
@@ -13,42 +12,46 @@ const Experiences = ({ experiences }: { experiences: ExperienceItem[] }) => {
     <section
       ref={ref}
       id="experiences"
-      className="mb-28 max-w-[121.143vw] sm:max-w-[53rem] scroll-mt-28 text-center pb-20 relative"
+      className="mb-28 max-w-[121.143vw] sm:max-w-[65rem] mx-auto scroll-mt-28 text-center pb-20 relative px-4 sm:px-0"
     >
-      <SectionHeading>My Timeline</SectionHeading>
+      <SectionHeading className="mb-20">My Journey</SectionHeading>
 
-      <Timeline
-        value={experiences}
-        align="alternate"
-        className="pl-[1.143vw] sm:pl-2"
-        opposite={(item) => (
-          <div className="text-[2vw] sm:text-sm text-gray-500 min-w-[14.286vw] sm:min-w-[100px]">{item.date}</div>
-        )}
-        content={(item) => (
-          <div className="p-[2.286vw] text-start sm:p-4 rounded-2xl shadow-black/10 dark:shadow-white/10 shadow-lg border border-gray-200 border-black/[0.1] dark:bg-white/10 bg-white mb-[1.714vw] sm:mb-3">
-            <h3 className="text-[2.571vw] sm:text-lg font-semibold text-gray-700 dark:text-white/70">
-              {item.title}
-            </h3>
-            <p className="text-[2vw] sm:text-sm font-semibold text-gray-700 dark:text-white/70 mb-[0.571vw] sm:mb-1">
-              {item.company} · {item.location}
-            </p>
-            <p className="text-[2vw] sm:text-sm text-justify text-gray-700 dark:text-white/70 mb-[1.143vw] sm:mb-2">
-              {item.description}
-            </p>
-            <div className="flex flex-wrap gap-[1.143vw] sm:gap-2 mt-[1.143vw] sm:mt-2">
-              {(item.techStack as string[]).filter((tech: string, idx: number, arr: string[]) => arr.indexOf(tech) === idx).map((tech: string) => (
-                <span
-                  key={tech}
-                  className="px-[1.143vw] py-[0.571vw] sm:px-2 sm:py-1 text-[1.714vw] sm:text-xs dark:bg-white/10 bg-white dark:bg-zinc-800 border border-gray-200 border-black/[0.1] text-gray-700 dark:text-white/70 rounded-full"
-                >
-                  {tech}
-                </span>
-              ))}
+      <div className="mt-12 text-left">
+        <Timeline
+          value={experiences}
+          align="alternate"
+          className="pl-[1.143vw] sm:pl-2 customized-timeline"
+          opposite={(item) => (
+            <div className="text-sm sm:text-lg text-gray-400 dark:text-gray-500 font-mono tracking-widest mt-2">{item.date}</div>
+          )}
+          content={(item) => (
+            <div className="px-6 sm:px-10 py-1 pb-16 group">
+              <span className="text-primary-600 dark:text-primary-500 font-mono font-bold tracking-widest text-xs sm:text-sm uppercase mb-3 block">
+                {item.company} • {item.location}
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-heading font-black text-gray-900 dark:text-white mb-4 tracking-tight">
+                {item.title}
+              </h3>
+              <p className="text-base sm:text-[17px] leading-relaxed text-gray-600 dark:text-gray-400 mb-6 font-sans">
+                {item.description}
+              </p>
+              <div className="flex flex-wrap gap-3 mt-4">
+                {(item.techStack as string[]).filter((tech: string, idx: number, arr: string[]) => arr.indexOf(tech) === idx).map((tech: string) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 text-[11px] font-bold tracking-widest uppercase border border-gray-300 text-gray-600 dark:border-white/10 dark:text-white/50 rounded-none bg-transparent"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-        marker={(item) => <i className={`p-icon ${item.icon}`} />}
-      />
+          )}
+          marker={(item) => (
+            <div className="flex items-center justify-center w-4 h-4 rounded-full bg-primary-500 shadow-[0_0_15px_rgba(16,185,129,0.8)] z-10 mt-3 transform group-hover:scale-150 transition-transform"></div>
+          )}
+        />
+      </div>
     </section>
   );
 };

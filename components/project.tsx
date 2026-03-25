@@ -14,6 +14,7 @@ export type ProjectProps = {
   imageUrl: StaticImageData;
   linkUrl: string;
 };
+
 export default function Project({
   title,
   description,
@@ -26,50 +27,54 @@ export default function Project({
     target: ref,
     offset: ["0 1", "1.33 1"],
   });
-  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
+  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.85, 1]);
+  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.4, 1]);
 
   return (
     <motion.div
       ref={ref}
       style={{ scale: scaleProgress, opacity: opacityProgress }}
-      className="group mb-3 sm:mb-8 last:mb-0"
+      className="group mb-16 sm:mb-32 last:mb-0 w-full"
     >
-      <section className=" bg-gray-100 max-w-[42rem] border-black/5 overflow-hidden sm:pr-0 relative sm:h-[20rem] even:pl-8 rounded-lg hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
-        <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[50%] flex flex-col h-full sm:group-even:ml-[18rem]">
+      <div className="flex flex-col sm:flex-row sm:group-even:flex-row-reverse items-center gap-8 sm:gap-16 w-full">
+        {/* Image Side */}
+        <div className="w-full sm:w-1/2 relative overflow-hidden rounded-2xl shadow-2xl">
+          <Link href={linkUrl} target="_blank" className="block w-full h-full">
+            <div className="absolute inset-0 bg-primary-500/10 opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none"></div>
+            <Image
+              src={imageUrl}
+              alt={title}
+              quality={95}
+              className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </Link>
+        </div>
+
+        {/* Content Side */}
+        <div className="w-full sm:w-1/2 flex flex-col justify-center text-left">
           <Link
             href={linkUrl}
             target="_blank"
-            className="text-xl sm:text-2xl font-semibold"
+            className="text-3xl sm:text-5xl font-heading font-extrabold text-gray-900 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors tracking-tight mb-4"
           >
             {title}
           </Link>
-          <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70 text-sm sm:text-[16px]">
+          <div className="w-16 h-1 bg-primary-500 mb-6"></div>
+          <p className="leading-relaxed text-gray-600 dark:text-gray-300 text-base sm:text-lg mb-8">
             {description}
           </p>
-          <ul className="flex flex-wrap mt-2 sm:mt-4 gap-2">
+          <ul className="flex flex-wrap gap-3">
             {tags.map((tag, index) => (
               <li
                 key={index}
-                className="bg-black/[0.7] px-3 py-1 text-xs sm:text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70"
+                className="bg-transparent border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 text-sm font-semibold tracking-wide rounded-none uppercase"
               >
                 {tag}
               </li>
             ))}
           </ul>
         </div>
-
-        <Image
-          src={imageUrl}
-          alt={title}
-          quality={95}
-          className="absolute hidden sm:block top-8 -right-40 w-[28.25rem] rounded-t-lg shadow-2xl transition group-hover:scale-[1.04]group-hover:-translate-x-3 group-hover:translate-y-3 group-hover:-rotate-2 
-        
-        group-even:group-hover:translate-x-3 group-even:group-hover:translate-y-3 group-even:group-hover:rotate-2
-
-        group-even:right-[initial] group-even:-left-40"
-        />
-      </section>
+      </div>
     </motion.div>
   );
 }

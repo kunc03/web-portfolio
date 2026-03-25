@@ -32,18 +32,19 @@ export default function Projects({ projects }: { projects: Array<ProjectProps & 
         sectionRef.current = el;
       }}
       id="projects"
-      className="scroll-mt-28 mt-28 mb-28 sm:mb-40 relative"
+      className="scroll-mt-28 w-full max-w-[70rem] mx-auto mt-28 mb-28 sm:mb-40 relative px-4 sm:px-0"
     >
-      <SectionHeading>My projects</SectionHeading>
+      <SectionHeading>Featured Works</SectionHeading>
 
-      <div>
+      <div className="flex flex-col gap-12 sm:gap-20 mt-16 sm:mt-24">
         <AnimatePresence initial={false}>
           {visible.map((project) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, y: 30 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
             >
               <Project
                 title={project.title}
@@ -58,15 +59,19 @@ export default function Projects({ projects }: { projects: Array<ProjectProps & 
       </div>
 
       {hasMore && (
-        <div className="flex justify-center mt-8">
+        <motion.div 
+          className="flex justify-center mt-20"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
           <button
             onClick={showAll ? handleShowLess : () => setShowAll(true)}
-            className="group flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-full font-medium text-sm hover:bg-gray-700 active:scale-95 transition-all dark:bg-white/10 dark:hover:bg-white/20"
+            className="group flex items-center gap-3 px-10 py-4 font-semibold text-gray-900 border-2 border-gray-900 dark:text-white dark:border-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all uppercase tracking-widest text-sm outline-none focus:ring-4 focus:ring-gray-900/20"
           >
-            {showAll ? 'Show less' : `See all projects (${projects.length})`}
-            <span className={`transition-transform duration-300 inline-block ${showAll ? 'rotate-180' : ''}`}>↓</span>
+            {showAll ? 'Collapse Directory' : `View Directory (${projects.length})`}
           </button>
-        </div>
+        </motion.div>
       )}
     </section>
   );

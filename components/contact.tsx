@@ -21,30 +21,24 @@ export default function Contact() {
     <motion.section
       id="contact"
       ref={ref}
-      className="mb-20 sm:mb-28 w-[min(100%,38rem)] scroll-mt-28 text-center relative"
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-      }}
-      transition={{
-        duration: 1,
-      }}
-      viewport={{ once: true }}
+      className="mb-20 sm:mb-28 max-w-[42rem] mx-auto scroll-mt-28 text-center px-4"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true, margin: "-100px" }}
     >
-      <SectionHeading>Contact me</SectionHeading>
+      <SectionHeading className="mb-4 text-gray-900 dark:text-white">Contact me</SectionHeading>
 
-      <p className="text-gray-700 -mt-6 dark:text-white/80">
+      <p className="text-gray-600 dark:text-gray-400 text-base sm:text-lg mb-10">
         Please contact me directly at{' '}
-        <a className="underline" href="mailto:baguskuncoro003@gmail.com">
+        <a className="text-primary-600 dark:text-primary-400 font-semibold hover:underline underline-offset-4" href="mailto:baguskuncoro003@gmail.com">
           baguskuncoro003@gmail.com
         </a>{' '}
         or through this form.
       </p>
 
       <form
-        className="mt-10 flex flex-col "
+        className="flex flex-col gap-4 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-white/10 rounded-3xl p-6 sm:p-10 shadow-sm"
         action={async (formData) => {
           const { data, error } = await sendEmail(formData);
 
@@ -58,28 +52,37 @@ export default function Contact() {
           });
         }}
       >
-        <input
-          name="senderEmail"
-          className="h-14 px-4 rounded-lg borderBlack dark:bg-white/10 dark:text-white/80 dark:opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
-          type="email"
-          required
-          maxLength={500}
-          placeholder="Your email"
-          onChange={(e) => setSenderEmail(e.currentTarget.value)}
-        />
-        <textarea
-          name="message"
-          className="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white/10 dark:text-white/80 dark:opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
-          required
-          maxLength={5000}
-          placeholder="Your message"
-          onChange={(e) => setMessage(e.currentTarget.value)}
-        />
+        <div className="flex flex-col text-left">
+          <label htmlFor="senderEmail" className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 ml-1">Email</label>
+          <input
+            id="senderEmail"
+            name="senderEmail"
+            className="h-14 px-5 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl focus:bg-white focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all font-sans"
+            type="email"
+            required
+            maxLength={500}
+            placeholder="your@email.com"
+            onChange={(e) => setSenderEmail(e.currentTarget.value)}
+          />
+        </div>
+        
+        <div className="flex flex-col text-left mt-2">
+          <label htmlFor="message" className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 ml-1">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            className="h-48 resize-none p-5 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl focus:bg-white focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all font-sans"
+            required
+            maxLength={5000}
+            placeholder="Tell me about your project..."
+            onChange={(e) => setMessage(e.currentTarget.value)}
+          />
+        </div>
 
-        <SubmitBtn disabled={!isFormFilled} />
+        <div className="flex justify-end mt-4">
+          <SubmitBtn disabled={!isFormFilled} />
+        </div>
       </form>
-
-      
     </motion.section>
   );
 }

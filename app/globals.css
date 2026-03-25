@@ -2,10 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  --line-color: #e5e7eb;
+@layer base {
+  html {
+    --line-color: #e5e7eb;
+    scroll-behavior: smooth;
+  }
+  
+  .dark {
+    --line-color: rgba(255,255,255,0.1);
+  }
 }
 
-.borderBlack {
-  @apply border border-black/10;
+@layer utilities {
+  .borderBlack {
+    @apply border border-black/10;
+  }
+  
+  .glass {
+    @apply bg-white/60 backdrop-blur-md border border-white/20 shadow-sm dark:bg-gray-950/40 dark:border-white/5;
+  }
+
+  .glass-card {
+    @apply bg-white/50 backdrop-blur-lg border border-gray-200/50 shadow-lg dark:bg-white/5 dark:border-white/10;
+  }
 }

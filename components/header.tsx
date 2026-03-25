@@ -55,24 +55,24 @@ export default function Header() {
   return (
     <header className="z-[999] relative">
       <motion.div
-        className="fixed left-1/2 -translate-x-1/2 overflow-hidden border border-white border-opacity-40 bg-white bg-opacity-80 shadow-lg shadow-black/[0.03] backdrop-blur-[0.5rem] dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-75 rounded-2xl sm:rounded-full w-[90vw] sm:w-[35rem] sm:h-[3.5rem] h-auto py-1 sm:py-0 top-[1.35rem] sm:top-[.85rem] flex items-center justify-center"
-        initial={{ y: -80, x: '-50%', opacity: 0 }}
+        className="fixed left-1/2 -translate-x-1/2 overflow-hidden glass rounded-full w-[90vw] sm:w-[36rem] sm:h-[3.75rem] h-auto py-1 sm:py-0 top-[1.35rem] sm:top-[1.25rem] flex items-center justify-center transition-all duration-300"
+        initial={{ y: -100, x: '-50%', opacity: 0 }}
         animate={{ y: 0, x: '-50%', opacity: 1 }}
-        transition={{ type: 'tween', ease: 'easeOut', duration: 0.4 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 20, mass: 0.5 }}
       >
         <nav className="w-full h-full py-1 sm:p-0 flex items-center justify-center">
           {/* Single sliding indicator — never unmounts, always tracks active item */}
-          <ul className="relative flex w-full flex-wrap items-center justify-center gap-1 text-xs sm:text-[14px] font-medium text-gray-500 sm:w-[initial] sm:flex-nowrap sm:gap-5 px-2 sm:px-0">
+          <ul className="relative flex w-full flex-wrap items-center justify-center gap-1 text-[13px] sm:text-[14px] font-medium text-gray-500 sm:w-[initial] sm:flex-nowrap sm:gap-2 px-2 sm:px-2">
             {indicatorRect && (
               <motion.span
-                className="absolute bg-gray-100 rounded-full -z-10 dark:bg-gray-800 pointer-events-none"
+                className="absolute bg-gray-900 rounded-full -z-10 dark:bg-gray-100 pointer-events-none"
                 animate={{
                   left: indicatorRect.left,
                   top: indicatorRect.top,
                   width: indicatorRect.width,
                   height: indicatorRect.height,
                 }}
-                transition={{ type: 'tween', ease: 'easeInOut', duration: 0.22 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               />
             )}
 
@@ -82,12 +82,15 @@ export default function Header() {
                 ref={(el) => {
                   if (el) itemRefs.current.set(link.href, el);
                 }}
-                className="h-3/4 flex items-center justify-center"
+                className="h-3/4 flex items-center justify-center relative"
               >
                 <Link
                   className={clsx(
-                    'flex w-full items-center justify-center px-2 py-1.5 sm:p-3 hover:text-gray-950 transition-colors duration-200 dark:text-gray-500 dark:hover:text-gray-300',
-                    { 'text-gray-950 dark:text-gray-200': activeSection === link.href }
+                    'flex w-full items-center justify-center px-4 py-2 sm:py-1.5 transition-colors duration-200 z-10 font-sans',
+                    { 
+                      'text-white dark:text-gray-900': activeSection === link.href,
+                      'text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-200': activeSection !== link.href
+                    }
                   )}
                   href={link.href}
                   onClick={() => {

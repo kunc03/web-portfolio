@@ -9,19 +9,26 @@ export default function About({ paragraphs = [] }: { paragraphs?: string[] }) {
 
   return (
     <motion.section
-      className="pb-20 sm:pb-0 max-w-[45rem] h-auto sm:h-screen text-center leading-4 sm:leading-8 scroll-mt-28 sm:text-[16px] text-[2.286vw] relative"
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.175 }}
+      className="mb-20 sm:mb-28 max-w-[48rem] mx-auto text-center scroll-mt-28 relative px-4"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6 }}
       id="about"
       ref={ref}
     >
-      <SectionHeading>About me</SectionHeading>
-      {paragraphs.map((text, idx) => (
-        <p key={idx} className="mb-3 text-justify">
-          {text}
-        </p>
-      ))}
+      <SectionHeading className="mb-10 text-gray-900 dark:text-white">About me</SectionHeading>
+      
+      <div className="glass-card rounded-3xl p-6 sm:p-10 border border-black/5 dark:border-white/10 shadow-lg hover:shadow-xl transition-shadow text-gray-700 dark:text-gray-300">
+        <div className="text-base sm:text-lg font-sans leading-relaxed tracking-wide text-justify sm:text-center space-y-5">
+          {paragraphs.map((text, idx) => (
+            <p key={idx}>{text}</p>
+          ))}
+          {paragraphs.length === 0 && (
+            <p className="italic text-gray-500">No about information provided.</p>
+          )}
+        </div>
+      </div>
     </motion.section>
   );
 }
