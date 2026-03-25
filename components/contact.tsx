@@ -53,7 +53,9 @@ export default function Contact() {
             return;
           }
 
-          toast.success('Email sent successfully!');
+          toast.success('Thanks! Your message has been sent successfully.', {
+            duration: 5000,
+          });
         }}
       >
         <input
