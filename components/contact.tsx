@@ -35,9 +35,9 @@ export default function Contact() {
     >
       <SectionHeading>Contact me</SectionHeading>
 
-      <p className="text-gray-700 -mt-6 dark:text-white/80">
+      <p className="text-gray-700 dark:text-gray-300 -mt-6">
         Please contact me directly at{' '}
-        <a className="underline" href="mailto:baguskuncoro003@gmail.com">
+        <a className="underline text-gray-900 dark:text-white" href="mailto:baguskuncoro003@gmail.com">
           baguskuncoro003@gmail.com
         </a>{' '}
         or through this form.
@@ -60,7 +60,7 @@ export default function Contact() {
       >
         <input
           name="senderEmail"
-          className="h-14 px-4 rounded-lg borderBlack dark:bg-white/10 dark:text-white/80 dark:opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
+          className="h-14 px-4 rounded-lg border border-black/5 dark:border-white/10 bg-white/50 dark:bg-white/10 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:bg-white/80 dark:focus:bg-white/20 transition-all outline-none"
           type="email"
           required
           maxLength={500}
@@ -69,7 +69,7 @@ export default function Contact() {
         />
         <textarea
           name="message"
-          className="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white/10 dark:text-white/80 dark:opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
+          className="h-52 my-3 rounded-lg border border-black/5 dark:border-white/10 bg-white/50 dark:bg-white/10 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:bg-white/80 dark:focus:bg-white/20 transition-all outline-none p-4"
           required
           maxLength={5000}
           placeholder="Your message"

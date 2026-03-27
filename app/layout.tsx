@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="!scroll-smooth" suppressHydrationWarning>
-      <body suppressHydrationWarning className={`${inter.className} bg-gray-50 text-gray-950 relative dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90`}>
+      <body suppressHydrationWarning className={`${inter.className} bg-transparent text-gray-950 px-4 relative dark:text-gray-50 dark:text-opacity-90 transition-all duration-300`}>
         {children}
         <Toaster position="top-right" />
       </body>

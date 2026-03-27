@@ -3,12 +3,12 @@ import Footer from '@/components/footer';
 import ThemeSwitch from '@/components/theme-switch';
 import ActiveSectionContextProvider from '@/context/active-section';
 
-import BackgroundBlobs from '@/components/background-blobs';
+import StarryBackground from '@/components/starry-background';
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative pt-28 sm:pt-36">
-      <BackgroundBlobs />
+    <div className="relative pt-28 sm:pt-36 min-h-screen">
+      <StarryBackground />
       <ActiveSectionContextProvider>
         <Header />
         {children}

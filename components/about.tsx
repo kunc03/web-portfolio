@@ -18,7 +18,7 @@ export default function About({ paragraphs = [] }: { paragraphs?: string[] }) {
     >
       <SectionHeading>About me</SectionHeading>
       {paragraphs.map((text, idx) => (
-        <p key={idx} className="mb-3 text-justify">
+        <p key={idx} className="mb-3 text-justify text-gray-700 dark:text-gray-200">
           {text}
         </p>
       ))}
