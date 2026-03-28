@@ -1,11 +1,11 @@
 "use client";
 
-import { useScroll, useTransform } from "framer-motion";
+import { useSpring, useMotionValue, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useState } from "react";
 import type { StaticImageData } from "next/image";
+import { BsArrowRight } from "react-icons/bs";
 
 export type ProjectProps = {
   title: string;
@@ -14,6 +14,7 @@ export type ProjectProps = {
   imageUrl: StaticImageData;
   linkUrl: string;
 };
+
 export default function Project({
   title,
   description,
@@ -21,55 +22,76 @@ export default function Project({
   imageUrl,
   linkUrl,
 }: ProjectProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["0 1", "1.33 1"],
-  });
-  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
+  const [isHovered, setIsHovered] = useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 150 };
+  const x = useSpring(mouseX, springConfig);
+  const y = useSpring(mouseY, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  };
 
   return (
-    <motion.div
-      ref={ref}
-      style={{ scale: scaleProgress, opacity: opacityProgress }}
-      className="group mb-3 sm:mb-8 last:mb-0"
-    >
-      <section className="bg-white/40 dark:bg-white/5 max-w-[42rem] border border-black/5 dark:border-white/10 backdrop-blur-sm overflow-hidden sm:pr-0 relative sm:h-[20rem] even:pl-8 rounded-lg hover:bg-white/50 dark:hover:bg-white/10 transition sm:group-even:pl-8 text-gray-950 dark:text-white">
-        <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[50%] flex flex-col h-full sm:group-even:ml-[18rem]">
-          <Link
-            href={linkUrl}
-            target="_blank"
-            className="text-xl sm:text-2xl font-semibold"
-          >
+    <Link href={linkUrl} target="_blank" className="block w-full">
+      <motion.section
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="relative group flex flex-col sm:flex-row sm:items-center justify-between py-10 px-6 sm:px-12 border-b border-black/5 dark:border-white/10 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors duration-300 overflow-visible bg-white/40 dark:bg-transparent backdrop-blur-sm sm:backdrop-blur-none"
+      >
+        <div className="z-10">
+          <h3 className="text-3xl sm:text-5xl font-bold tracking-tighter text-gray-950 dark:text-white group-hover:translate-x-3 transition-transform duration-500">
             {title}
-          </Link>
-          <p className="mt-2 leading-relaxed text-gray-700 dark:text-gray-300 text-sm sm:text-[16px]">
-            {description}
-          </p>
-          <ul className="flex flex-wrap mt-2 sm:mt-4 gap-2">
-            {tags.map((tag, index) => (
-              <li
-                key={index}
-                className="bg-black/[0.7] px-3 py-1 text-xs sm:text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70"
-              >
+          </h3>
+          <div className="mt-4 flex flex-wrap gap-3 group-hover:translate-x-3 transition-transform duration-500 delay-75">
+            {tags.slice(0, 4).map((tag, index) => (
+              <span key={index} className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-widest">
                 {tag}
-              </li>
+              </span>
             ))}
-          </ul>
+          </div>
         </div>
 
-        <Image
-          src={imageUrl}
-          alt={title}
-          quality={95}
-          className="absolute hidden sm:block top-8 -right-40 w-[28.25rem] rounded-t-lg shadow-2xl transition group-hover:scale-[1.04]group-hover:-translate-x-3 group-hover:translate-y-3 group-hover:-rotate-2 
-        
-        group-even:group-hover:translate-x-3 group-even:group-hover:translate-y-3 group-even:group-hover:rotate-2
+        <div className="mt-6 sm:mt-0 flex items-center gap-2 text-gray-400 group-hover:text-gray-950 dark:group-hover:text-white transition-colors duration-300 z-10">
+          <span className="text-sm font-semibold uppercase tracking-widest">Visit Project</span>
+          <BsArrowRight className="text-2xl group-hover:translate-x-2 transition-transform duration-300" />
+        </div>
 
-        group-even:right-[initial] group-even:-left-40"
-        />
-      </section>
-    </motion.div>
+        {/* Floating Image Reveal */}
+        <motion.div
+          style={{ 
+            x, 
+            y, 
+            translateX: "-50%", 
+            translateY: "-50%", 
+            pointerEvents: "none",
+            position: "absolute",
+            top: 0,
+            left: 0
+          }}
+          className="z-50 hidden sm:block w-[350px] h-[220px] pointer-events-none rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-4 border-white/40 dark:border-white/20"
+          initial={{ opacity: 0, scale: 0.5, rotate: -5 }}
+          animate={{ 
+            opacity: isHovered ? 1 : 0, 
+            scale: isHovered ? 1 : 0.5,
+            rotate: isHovered ? 0 : -5
+          }}
+          transition={{ duration: 0.4, type: "spring", bounce: 0.3 }}
+        >
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill
+            className="object-cover"
+            quality={95}
+          />
+        </motion.div>
+      </motion.section>
+    </Link>
   );
 }

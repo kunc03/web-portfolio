@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import Bird from './bird';
 
 interface Star {
   x: number;
@@ -13,6 +14,14 @@ interface Star {
   twinkleSpeed: number;
 }
 
+interface BirdData {
+  id: string;
+  startX: number;
+  startY: number;
+  speedX: number;
+  size: number;
+}
+
 interface Cloud {
   x: number;
   y: number;
@@ -23,9 +32,20 @@ interface Cloud {
   puffs: { offsetX: number; offsetY: number; rx: number; ry: number }[];
 }
 
+interface ShootingStar {
+  x: number;
+  y: number;
+  size: number;
+  speed: number;
+  angle: number;
+  opacity: number;
+  trailLength: number;
+}
+
 const DualSkyBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDark, setIsDark] = useState(true);
+  const [birds, setBirds] = useState<BirdData[]>([]);
 
   useEffect(() => {
     // Detect theme
@@ -49,12 +69,41 @@ const DualSkyBackground: React.FC = () => {
 
     let stars: Star[] = [];
     let clouds: Cloud[] = [];
+    let shootingStars: ShootingStar[] = [];
     let animationFrameId: number;
     let scrollY = 0;
     
     // Transition factors (0 to 1)
     let nightFactor = isDark ? 1 : 0;
     let dayFactor = isDark ? 0 : 1;
+
+    const spawnShootingStar = () => {
+      const startX = Math.random() * canvas.width * 1.5;
+      const startY = Math.random() * canvas.height * 0.5;
+      const size = Math.random() * 2 + 1;
+      shootingStars.push({
+        x: startX,
+        y: startY,
+        size: size,
+        speed: Math.random() * 10 + 10 + (size * 2), // Faster if bigger
+        angle: Math.PI * 0.75 + (Math.random() - 0.5) * 0.2, // Aiming bottom-leftish
+        opacity: 1,
+        trailLength: (Math.random() * 100 + 100) * (size / 2) // Longer trail if bigger
+      });
+    };
+
+    const spawnBird = () => {
+      const goesRight = Math.random() > 0.5;
+      const size = Math.random() * 30 + 25; // Random size between 25px and 55px
+      const newBird: BirdData = {
+        id: Math.random().toString(36).substr(2, 9),
+        startX: goesRight ? -100 : window.innerWidth + 100,
+        startY: Math.random() * (window.innerHeight * 0.4) + 50,
+        speedX: goesRight ? Math.random() * 3 + 4 : -(Math.random() * 3 + 4),
+        size: size
+      };
+      setBirds(prev => [...prev, newBird]);
+    };
 
     const handleScroll = () => {
       scrollY = window.scrollY;
@@ -133,7 +182,7 @@ const DualSkyBackground: React.FC = () => {
       ctx.beginPath();
       ctx.fillStyle = `rgba(255, 255, 255, ${cloudOpacity})`;
       
-      cloud.puffs.forEach(puff => {
+      cloud.puffs.forEach((puff: any) => {
         // Move to the start of the ellipse to avoid connecting lines
         ctx.moveTo(cloud.x + puff.offsetX + puff.rx, drawY + puff.offsetY);
         ctx.ellipse(cloud.x + puff.offsetX, drawY + puff.offsetY, puff.rx, puff.ry, 0, 0, Math.PI * 2);
@@ -216,6 +265,36 @@ const DualSkyBackground: React.FC = () => {
           if (star.y < 0) star.y = canvas.height;
           if (star.y > canvas.height) star.y = 0;
         });
+
+        // Update and Draw Shooting Stars
+        if (nightFactor > 0.8) {
+          if (Math.random() < 0.005) spawnShootingStar();
+          
+          shootingStars.forEach((ss, index) => {
+            const endX = ss.x - Math.cos(ss.angle) * ss.trailLength;
+            const endY = ss.y - Math.sin(ss.angle) * ss.trailLength;
+            
+            const grad = ctx.createLinearGradient(ss.x, ss.y, endX, endY);
+            grad.addColorStop(0, `rgba(255, 255, 255, ${ss.opacity * nightFactor})`);
+            grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            
+            ctx.beginPath();
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = ss.size;
+            ctx.lineCap = 'round';
+            ctx.moveTo(ss.x, ss.y);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+            
+            ss.x += Math.cos(ss.angle) * ss.speed;
+            ss.y += Math.sin(ss.angle) * ss.speed;
+            ss.opacity -= 0.015;
+            
+            if (ss.opacity <= 0 || ss.x < -200 || ss.y > canvas.height + 200) {
+              shootingStars.splice(index, 1);
+            }
+          });
+        }
       }
 
       // Draw Clouds (Day)
@@ -225,6 +304,11 @@ const DualSkyBackground: React.FC = () => {
           cloud.x += cloud.speedX;
           if (cloud.x > canvas.width + cloud.width) cloud.x = -cloud.width;
         });
+
+        // Spawn Birds occasionally
+        if (dayFactor > 0.5 && Math.random() < 0.003) {
+          spawnBird();
+        }
       }
 
       animationFrameId = requestAnimationFrame(draw);
@@ -243,11 +327,21 @@ const DualSkyBackground: React.FC = () => {
   }, [isDark]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 -z-20 w-full h-full pointer-events-none transition-opacity duration-1000"
-      style={{ backgroundColor: isDark ? '#020205' : '#E0F7FA' }}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 -z-20 w-full h-full pointer-events-none transition-opacity duration-1000"
+        style={{ backgroundColor: isDark ? '#020205' : '#E0F7FA' }}
+      />
+      {birds.map(bird => (
+        <Bird 
+          key={bird.id}
+          {...bird}
+          isDark={isDark}
+          onComplete={(id) => setBirds(prev => prev.filter(b => b.id !== id))}
+        />
+      ))}
+    </>
   );
 };
 

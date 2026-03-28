@@ -39,7 +39,7 @@ export default function Intro() {
           <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" />
         </Link>
         <a
-          className="group bg-white/10 px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-105 active:scale-105 transition cursor-pointer border border-white/20 text-gray-900 dark:text-white dark:bg-white/10"
+          className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-105 active:scale-105 transition cursor-pointer borderBlack text-gray-900 dark:text-white dark:bg-white/10"
           href="/CV.pdf"
           download
         >
@@ -47,14 +47,14 @@ export default function Intro() {
         </a>
         <div className="flex gap-2">
           <a
-            className="bg-white/10 text-gray-700 dark:text-white/70 hover:text-gray-900 dark:hover:text-white px-7 py-3 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer border border-white/20"
+            className="bg-white text-gray-700 dark:text-white/70 hover:text-gray-900 dark:hover:text-white px-7 py-3 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10"
             href="https://www.linkedin.com/in/bagus-kuncoro-851636275/"
             target="_blank"
           >
             <BsLinkedin />
           </a>
           <a
-            className="bg-white/10 text-gray-700 dark:text-white/70 hover:text-gray-900 dark:hover:text-white px-7 py-3 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer border border-white/20"
+            className="bg-white text-gray-700 dark:text-white/70 hover:text-gray-900 dark:hover:text-white px-7 py-3 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10"
             href="https://github.com/kunc03/"
             target="_blank"
           >

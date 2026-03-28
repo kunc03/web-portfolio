@@ -36,14 +36,15 @@ export default function Projects({ projects }: { projects: Array<ProjectProps & 
     >
       <SectionHeading>My projects</SectionHeading>
 
-      <div>
+      <div className="flex flex-col border-t border-black/5 dark:border-white/10 max-w-[55rem] mx-auto overflow-visible relative">
         <AnimatePresence initial={false}>
           {visible.map((project) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.4 }}
+              className="w-full"
             >
               <Project
                 title={project.title}
@@ -58,13 +59,15 @@ export default function Projects({ projects }: { projects: Array<ProjectProps & 
       </div>
 
       {hasMore && (
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center mt-12 mb-4">
           <button
             onClick={showAll ? handleShowLess : () => setShowAll(true)}
-            className="group flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-full font-medium text-sm hover:bg-gray-700 active:scale-95 transition-all dark:bg-white/10 dark:hover:bg-white/20"
+            className="group flex items-center gap-3 bg-gray-900 text-white px-8 py-3.5 rounded-full font-medium outline-none focus:scale-110 hover:scale-105 hover:bg-gray-950 active:scale-105 transition-all dark:bg-white/10 dark:hover:bg-white/20 borderBlack"
           >
-            {showAll ? 'Show less' : `See all projects (${projects.length})`}
-            <span className={`transition-transform duration-300 inline-block ${showAll ? 'rotate-180' : ''}`}>↓</span>
+            {showAll ? 'Show less projects' : `Explore all ${projects.length} projects`}
+            <span className={`transition-transform duration-500 inline-block font-bold text-lg ${showAll ? 'rotate-180' : 'group-hover:translate-y-1'}`}>
+              ↓
+            </span>
           </button>
         </div>
       )}
