@@ -1,7 +1,8 @@
 import { isDbConfigured } from '@/lib/db';
-import { PROJECT_IMAGE_KEYS } from '@/lib/project-images';
 import { getProjects } from '@/lib/projects';
 import AdminProjectsEditor from '@/components/admin-projects-editor';
+import ImageUploadInput from '@/components/image-upload-input';
+import ImageKeySelect from '@/components/image-key-select';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,7 +14,7 @@ export default async function AdminProjectsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Projects</h1>
-        <p className="text-sm text-gray-600 dark:text-white/70 mt-1">Tags dipisah koma. Image pilih dari aset yang sudah ada.</p>
+        <p className="text-sm text-gray-600 dark:text-white/70 mt-1">Tags dipisah koma. Upload gambar baru atau pilih dari preset.</p>
       </div>
 
       <section className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/10 overflow-hidden">
@@ -24,7 +25,7 @@ export default async function AdminProjectsPage() {
         <div className="px-4 sm:px-6 py-6 border-t border-black/10 dark:border-white/10 bg-gray-50/60 dark:bg-white/5">
           <details>
             <summary className="cursor-pointer font-semibold text-gray-900 dark:text-white select-none">Tambah Project</summary>
-            <form action="/api/admin/projects/create" method="post" className="mt-4 grid grid-cols-1 gap-3">
+            <form action="/api/admin/projects/create" method="post" encType="multipart/form-data" className="mt-4 grid grid-cols-1 gap-3">
               <div className="flex flex-wrap gap-3 items-center">
                 <input
                   name="title"
@@ -41,24 +42,25 @@ export default async function AdminProjectsPage() {
                   disabled={!dbReady}
                 />
               </div>
-              <div className="flex flex-wrap gap-3 items-center">
-                <select
-                  name="imageKey"
-                  defaultValue={PROJECT_IMAGE_KEYS[0]}
-                  className="h-10 w-56 px-3 rounded-lg text-sm bg-white dark:bg-black/20 ring-1 ring-inset ring-black/10 dark:ring-white/10 focus:outline-none focus:ring-2 focus:ring-black/15 dark:focus:ring-white/20 disabled:opacity-60"
-                  disabled={!dbReady}
-                >
-                  {PROJECT_IMAGE_KEYS.map((k) => (
-                    <option key={k} value={k}>
-                      {k}
-                    </option>
-                  ))}
-                </select>
-                <label className="inline-flex items-center gap-2 text-sm text-gray-800 dark:text-white/80">
-                  <input name="isVisible" type="checkbox" defaultChecked className="h-4 w-4 accent-gray-900 dark:accent-white" disabled={!dbReady} />
-                  Tampil
-                </label>
+
+              {/* Upload gambar baru */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-gray-600 dark:text-white/60">Upload gambar baru (opsional, maks 5 MB)</label>
+                <ImageUploadInput inputId="create-image-file" previewId="create-img-preview" disabled={!dbReady} />
               </div>
+
+              {/* Atau pilih dari preset */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-gray-600 dark:text-white/60">Atau pilih gambar preset</label>
+                <div className="flex flex-wrap gap-3 items-center">
+                  <ImageKeySelect disabled={!dbReady} />
+                  <label className="inline-flex items-center gap-2 text-sm text-gray-800 dark:text-white/80">
+                    <input name="isVisible" type="checkbox" defaultChecked className="h-4 w-4 accent-gray-900 dark:accent-white" disabled={!dbReady} />
+                    Tampil
+                  </label>
+                </div>
+              </div>
+
               <textarea
                 name="description"
                 placeholder="Deskripsi"

@@ -1,6 +1,7 @@
 import { getAdminSession } from '@/lib/admin-auth';
 import { isDbConfigured } from '@/lib/db';
 import { createProject } from '@/lib/projects';
+import { put } from '@vercel/blob';
 import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -25,11 +26,22 @@ export async function POST(req: NextRequest) {
   if (!isDbConfigured()) return NextResponse.redirect(getReturnUrl(req), 303);
 
   const formData = await req.formData();
+
+  // Handle optional file upload
+  let imageKey = formData.get('imageKey');
+  const imageFile = formData.get('imageFile');
+  if (imageFile instanceof File && imageFile.size > 0 && imageFile.type.startsWith('image/')) {
+    const ext = imageFile.name.split('.').pop() ?? 'png';
+    const filename = `projects/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const blob = await put(filename, imageFile, { access: 'public' });
+    imageKey = blob.url;
+  }
+
   await createProject({
     title: formData.get('title'),
     description: formData.get('description'),
     tags: formData.get('tags'),
-    imageKey: formData.get('imageKey'),
+    imageKey,
     linkUrl: formData.get('linkUrl'),
     isVisible: formData.get('isVisible'),
   });

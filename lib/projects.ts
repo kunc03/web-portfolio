@@ -1,5 +1,5 @@
 import { getDbPool, isDbConfigured } from '@/lib/db';
-import { PROJECT_IMAGE_KEYS, resolveProjectImage } from '@/lib/project-images';
+import { PROJECT_IMAGE_KEYS, isExternalImageUrl, resolveProjectImage } from '@/lib/project-images';
 import type { StaticImageData } from 'next/image';
 
 export type ProjectItem = {
@@ -185,6 +185,9 @@ function normalizeTags(value: unknown) {
 
 function normalizeImageKey(value: unknown) {
   const key = String(value ?? '').trim();
+  // Terima URL eksternal (upload via Blob)
+  if (isExternalImageUrl(key)) return key;
+  // Fallback ke preset key
   if ((PROJECT_IMAGE_KEYS as readonly string[]).includes(key)) return key;
   return 'kopiq';
 }

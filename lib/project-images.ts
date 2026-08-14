@@ -38,6 +38,14 @@ const PROJECT_IMAGES: Record<ProjectImageKey, StaticImageData> = {
   kopiq,
 };
 
+export function isExternalImageUrl(imageKey: string): boolean {
+  return imageKey.startsWith('https://') || imageKey.startsWith('http://');
+}
+
 export function resolveProjectImage(imageKey: string): StaticImageData {
+  // Jika berupa URL (upload via Blob), return sebagai object kompatibel StaticImageData
+  if (isExternalImageUrl(imageKey)) {
+    return { src: imageKey, width: 1280, height: 800, blurDataURL: undefined } as unknown as StaticImageData;
+  }
   return PROJECT_IMAGES[(imageKey as ProjectImageKey) in PROJECT_IMAGES ? (imageKey as ProjectImageKey) : 'kopiq'];
 }
