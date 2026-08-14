@@ -27,14 +27,18 @@ export async function POST(req: NextRequest) {
 
   const formData = await req.formData();
 
-  // Handle optional file upload
+  // Handle optional file upload — fallback ke imageKey jika Blob gagal
   let imageKey = formData.get('imageKey');
   const imageFile = formData.get('imageFile');
   if (imageFile instanceof File && imageFile.size > 0 && imageFile.type.startsWith('image/')) {
-    const ext = imageFile.name.split('.').pop() ?? 'png';
-    const filename = `projects/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-    const blob = await put(filename, imageFile, { access: 'public' });
-    imageKey = blob.url;
+    try {
+      const ext = imageFile.name.split('.').pop() ?? 'png';
+      const filename = `projects/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+      const blob = await put(filename, imageFile, { access: 'public' });
+      imageKey = blob.url;
+    } catch (err) {
+      console.error('[upload-blob] failed, using imageKey fallback:', err);
+    }
   }
 
   await updateProject({
